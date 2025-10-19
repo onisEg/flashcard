@@ -489,10 +489,11 @@
         }
 
         .flashcard {
-            height: 100px;
+            height: 110px;
             perspective: 1000px;
             cursor: pointer;
             position: relative;
+            margin-bottom: 40px;
         }
 
         .flashcard-inner {
@@ -543,20 +544,77 @@
             word-break: break-word;
         }
 
-        .flashcard .category {
-            font-size: 0.7rem;
+        /* ===== أنماط مستوى الحفظ ===== */
+        .storage-indicator {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            font-size: 0.8rem;
             opacity: 0.9;
-            margin-top: 0.3rem;
             background: rgba(255, 255, 255, 0.2);
-            padding: 0.1rem 0.5rem;
-            border-radius: 10px;
-            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
         }
 
-        .flashcard:hover .flashcard-front,
-        .flashcard:hover .flashcard-back {
-            transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        .storage-indicator i {
+            font-size: 0.9rem;
+        }
+
+        .storage-controls {
+            position: absolute;
+            bottom: -35px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .flashcard:hover .storage-controls {
+            opacity: 1;
+        }
+
+        .storage-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .storage-btn.weak {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .storage-btn.medium {
+            background: linear-gradient(135deg, #f39c12, #f1c40f);
+            color: white;
+        }
+
+        .storage-btn.strong {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .storage-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         /* ===== قسم الاختبار ===== */
@@ -1413,7 +1471,8 @@
 
             /* تحسين تجربة اللمس على الكروت */
             .flashcard {
-                height: 120px;
+                height: 130px;
+                margin-bottom: 50px;
             }
 
             .flashcard-inner {
@@ -1431,10 +1490,49 @@
                 font-size: 1rem;
             }
 
-            /* تحسين عرض الفئات */
-            .flashcard .category {
-                font-size: 0.75rem;
-                padding: 0.15rem 0.6rem;
+            /* تحسين أزرار التحكم في مستوى الحفظ */
+            .storage-controls {
+                bottom: -40px;
+                gap: 8px;
+            }
+
+            .storage-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+
+            .storage-indicator {
+                font-size: 0.8rem;
+                padding: 3px 8px;
+            }
+        }
+
+        /* ===== تحسينات للشاشات الصغيرة جداً ===== */
+        @media (max-width: 480px) {
+            .flashcards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 0.5rem;
+            }
+
+            .flashcard {
+                height: 120px;
+                margin-bottom: 45px;
+            }
+
+            .flashcard h3 {
+                font-size: 0.9rem;
+            }
+
+            .storage-controls {
+                bottom: -30px;
+                gap: 4px;
+            }
+
+            .storage-btn {
+                width: 24px;
+                height: 24px;
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -1486,8 +1584,11 @@
                         <input type="text" id="searchInput" placeholder="بحث في الكلمات...">
                     </div>
                     <div class="filter-options">
-                        <select id="categoryFilter">
-                            <option value="all">كل الفئات</option>
+                        <select id="storageLevelFilter">
+                            <option value="all">كل المستويات</option>
+                            <option value="weak">ضعيف</option>
+                            <option value="medium">متوسط</option>
+                            <option value="strong">ممتاز</option>
                         </select>
                         <button id="shuffleBtn">
                             <i class="fas fa-random"></i> عشوائي
@@ -1586,19 +1687,19 @@
                         <span id="totalWords">0</span>
                     </div>
                     <div class="stat-card">
-                        <i class="fas fa-check-circle"></i>
-                        <h3>الكلمات المحفوظة</h3>
-                        <span id="masteredWords">0</span>
+                        <i class="fas fa-star"></i>
+                        <h3>كلمات ممتازة</h3>
+                        <span id="strongWords">0</span>
                     </div>
                     <div class="stat-card">
-                        <i class="fas fa-clock"></i>
-                        <h3>وقت الدراسة</h3>
-                        <span id="studyTime">0 دقيقة</span>
+                        <i class="fas fa-star-half-alt"></i>
+                        <h3>كلمات متوسطة</h3>
+                        <span id="mediumWords">0</span>
                     </div>
                     <div class="stat-card">
-                        <i class="fas fa-percentage"></i>
-                        <h3>نسبة الإتقان</h3>
-                        <span id="masteryRate">0%</span>
+                        <i class="fas fa-times-circle"></i>
+                        <h3>كلمات ضعيفة</h3>
+                        <span id="weakWords">0</span>
                     </div>
                 </div>
 
@@ -1628,7 +1729,6 @@
                     <div class="add-word-form">
                         <input type="text" id="newWord" placeholder="الكلمة">
                         <input type="text" id="newTranslation" placeholder="الترجمة">
-                        <input type="text" id="newCategory" placeholder="الفئة (اختياري)">
                         <button class="primary-btn" onclick="addWord()">
                             <i class="fas fa-plus"></i> إضافة كلمة
                         </button>
@@ -1736,7 +1836,6 @@
             <div class="edit-form">
                 <input type="text" id="editWord" placeholder="الكلمة">
                 <input type="text" id="editTranslation" placeholder="الترجمة">
-                <input type="text" id="editCategory" placeholder="الفئة">
                 <div class="edit-form-buttons">
                     <button class="primary-btn" onclick="saveEditWord()">حفظ</button>
                     <button class="secondary-btn" onclick="closeEditModal()">إلغاء</button>
@@ -1764,21 +1863,21 @@
 
         // ===== الكلمات الافتراضية =====
         const defaultWords = [
-            { word: "Hello", translation: "مرحبا", category: "تحيات" },
-            { word: "Goodbye", translation: "وداعا", category: "تحيات" },
-            { word: "Thank you", translation: "شكرا", category: "تحيات" },
-            { word: "Please", translation: "من فضلك", category: "تحيات" },
-            { word: "Sorry", translation: "آسف", category: "تحيات" },
-            { word: "Yes", translation: "نعم", category: "أساسية" },
-            { word: "No", translation: "لا", category: "أساسية" },
-            { word: "Water", translation: "ماء", category: "طبيعة" },
-            { word: "Food", translation: "طعام", category: "طبيعة" },
-            { word: "House", translation: "منزل", category: "مكان" },
-            { word: "Car", translation: "سيارة", category: "مركبة" },
-            { word: "Book", translation: "كتاب", category: "أشياء" },
-            { word: "Friend", translation: "صديق", category: "علاقات" },
-            { word: "Family", translation: "عائلة", category: "علاقات" },
-            { word: "Love", translation: "حب", category: "علاقات" }
+            { word: "Hello", translation: "مرحبا", storageLevel: 'weak' },
+            { word: "Goodbye", translation: "وداعا", storageLevel: 'weak' },
+            { word: "Thank you", translation: "شكرا", storageLevel: 'medium' },
+            { word: "Please", translation: "من فضلك", storageLevel: 'medium' },
+            { word: "Sorry", translation: "آسف", storageLevel: 'strong' },
+            { word: "Yes", translation: "نعم", storageLevel: 'strong' },
+            { word: "No", translation: "لا", storageLevel: 'strong' },
+            { word: "Water", translation: "ماء", storageLevel: 'medium' },
+            { word: "Food", translation: "طعام", storageLevel: 'weak' },
+            { word: "House", translation: "منزل", storageLevel: 'medium' },
+            { word: "Car", translation: "سيارة", storageLevel: 'weak' },
+            { word: "Book", translation: "كتاب", storageLevel: 'strong' },
+            { word: "Friend", translation: "صديق", storageLevel: 'medium' },
+            { word: "Family", translation: "عائلة", storageLevel: 'strong' },
+            { word: "Love", translation: "حب", storageLevel: 'strong' }
         ];
 
         // ===== تهيئة التطبيق =====
@@ -1794,7 +1893,7 @@
         // ===== وظائف التهيئة =====
         function initializeApp() {
             // تحميل الإعدادات من localStorage
-            const settings = JSON.parse(localStorage.getItem('flashcardSettings')) || {};
+            const settings = getSettings();
 
             // تطبيق الوضع الليلي
             if (settings.darkMode) {
@@ -1815,26 +1914,52 @@
         }
 
         function loadSavedData() {
-            const savedCards = localStorage.getItem('flashcards');
-            const savedStats = localStorage.getItem('studyStats');
-            const isFirstVisit = localStorage.getItem('isFirstVisit');
+            try {
+                const savedCards = localStorage.getItem('flashcards');
+                const savedStats = localStorage.getItem('studyStats');
+                const savedSettings = localStorage.getItem('flashcardSettings');
+                const isFirstVisit = localStorage.getItem('isFirstVisit');
 
-            // إذا كانت هذه هي الزيارة الأولى، قم بإضافة الكلمات الافتراضية
-            if (!isFirstVisit && !savedCards) {
-                flashcards = [...defaultWords];
-                localStorage.setItem('flashcards', JSON.stringify(flashcards));
-                localStorage.setItem('isFirstVisit', 'true');
-                showNotification('تمت إضافة كلمات افتراضية للمساعدة في البدء');
-            } else if (savedCards) {
-                flashcards = JSON.parse(savedCards);
+                if (savedCards) {
+                    flashcards = JSON.parse(savedCards);
+                } else if (!isFirstVisit) {
+                    flashcards = [...defaultWords];
+                    localStorage.setItem('flashcards', JSON.stringify(flashcards));
+                    localStorage.setItem('isFirstVisit', 'true');
+                    showNotification('تمت إضافة كلمات افتراضية للمساعدة في البدء');
+                }
+
+                if (savedStats) {
+                    studyStats = JSON.parse(savedStats);
+                }
+
+                if (savedSettings) {
+                    applySettings(JSON.parse(savedSettings));
+                }
+
+                filteredCards = [...flashcards];
+                displayFlashcards();
+                updateStatsDisplay();
+
+            } catch (e) {
+                console.error('Error loading data:', e);
+                showNotification('حدث خطأ أثناء تحميل البيانات', 'error');
+            }
+        }
+
+        function applySettings(settings) {
+            if (settings.darkMode) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeToggle').checked = true;
             }
 
-            filteredCards = [...flashcards];
-            displayFlashcards();
+            if (settings.soundEnabled === false) {
+                document.getElementById('soundToggle').checked = false;
+            }
 
-            if (savedStats) {
-                studyStats = JSON.parse(savedStats);
-                updateStatsDisplay();
+            if (settings.dailyGoal) {
+                document.getElementById('dailyWordsGoal').value = settings.dailyGoal;
+                document.getElementById('dailyGoal').textContent = settings.dailyGoal;
             }
         }
 
@@ -1883,7 +2008,7 @@
 
             // البحث والتصفية
             document.getElementById('searchInput').addEventListener('input', filterCards);
-            document.getElementById('categoryFilter').addEventListener('change', filterCards);
+            document.getElementById('storageLevelFilter').addEventListener('change', filterCards);
 
             // أزرار التحكم
             document.getElementById('shuffleBtn').addEventListener('click', shuffleCards);
@@ -1939,10 +2064,20 @@
         function addWord() {
             const word = document.getElementById('newWord').value.trim();
             const translation = document.getElementById('newTranslation').value.trim();
-            const category = document.getElementById('newCategory').value.trim();
 
             if (!word || !translation) {
                 showNotification('يرجى إدخال الكلمة والترجمة', 'error');
+                return;
+            }
+
+            // التحقق من وجود الكلمة مسبقاً
+            const existingCard = flashcards.find(card =>
+                card.word.toLowerCase() === word.toLowerCase() &&
+                card.translation.toLowerCase() === translation.toLowerCase()
+            );
+
+            if (existingCard) {
+                showNotification('هذه الكلمة موجودة بالفعل', 'error');
                 return;
             }
 
@@ -1950,9 +2085,11 @@
                 id: Date.now(),
                 word,
                 translation,
-                category: category || '',
                 mastered: false,
-                lastReviewed: null
+                lastReviewed: null,
+                storageLevel: 'weak',
+                reviewCount: 0,
+                correctAnswers: 0
             };
 
             flashcards.push(newCard);
@@ -1961,7 +2098,6 @@
             // مسح الحقول
             document.getElementById('newWord').value = '';
             document.getElementById('newTranslation').value = '';
-            document.getElementById('newCategory').value = '';
 
             saveData();
             displayFlashcards();
@@ -1980,6 +2116,8 @@
                 return;
             }
 
+            const fragment = document.createDocumentFragment();
+
             flashcards.forEach(card => {
                 const wordItem = document.createElement('div');
                 wordItem.className = 'word-item';
@@ -1987,7 +2125,9 @@
                     <div class="word-content">
                         <div class="word-text">${card.word}</div>
                         <div class="word-translation">${card.translation}</div>
-                        ${card.category ? `<small style="color: #7f8c8d;">${card.category}</small>` : ''}
+                        <small style="color: #7f8c8d; margin-right: 10px;">
+                            <i class="fas fa-star" style="color: ${getStorageLevelColor(card.storageLevel)}"></i>
+                        </small>
                     </div>
                     <div class="word-actions">
                         <button class="edit-btn" onclick="editWord(${card.id})">
@@ -1998,8 +2138,26 @@
                         </button>
                     </div>
                 `;
-                wordList.appendChild(wordItem);
+                fragment.appendChild(wordItem);
             });
+
+            wordList.appendChild(fragment);
+        }
+
+        function getStorageLevelColor(level) {
+            switch (level) {
+                case 'strong': return '#27ae60';
+                case 'medium': return '#f39c12';
+                default: return '#e74c3c';
+            }
+        }
+
+        function getStorageLevelText(level) {
+            switch (level) {
+                case 'strong': return 'ممتاز';
+                case 'medium': return 'متوسط';
+                default: return 'ضعيف';
+            }
         }
 
         function editWord(cardId) {
@@ -2009,7 +2167,6 @@
             editingCardId = cardId;
             document.getElementById('editWord').value = card.word;
             document.getElementById('editTranslation').value = card.translation;
-            document.getElementById('editCategory').value = card.category || '';
 
             document.getElementById('editModal').style.display = 'block';
         }
@@ -2019,7 +2176,6 @@
 
             const word = document.getElementById('editWord').value.trim();
             const translation = document.getElementById('editTranslation').value.trim();
-            const category = document.getElementById('editCategory').value.trim();
 
             if (!word || !translation) {
                 showNotification('يرجى إدخال الكلمة والترجمة', 'error');
@@ -2031,8 +2187,7 @@
                 flashcards[cardIndex] = {
                     ...flashcards[cardIndex],
                     word,
-                    translation,
-                    category
+                    translation
                 };
 
                 filteredCards = [...flashcards];
@@ -2108,16 +2263,17 @@
                     if (parts.length >= 2) {
                         const word = parts[0].trim();
                         const translation = parts[1].trim();
-                        const category = parts[2] ? parts[2].trim() : '';
 
                         if (word && translation) {
                             newCards.push({
                                 id: Date.now() + i,
                                 word,
                                 translation,
-                                category,
                                 mastered: false,
-                                lastReviewed: null
+                                lastReviewed: null,
+                                storageLevel: 'weak',
+                                reviewCount: 0,
+                                correctAnswers: 0
                             });
                         }
                     }
@@ -2149,16 +2305,17 @@
                 if (row && row.length >= 2) {
                     const word = String(row[0]).trim();
                     const translation = String(row[1]).trim();
-                    const category = row[2] ? String(row[2]).trim() : '';
 
                     if (word && translation) {
                         newCards.push({
                             id: Date.now() + i,
                             word,
                             translation,
-                            category,
                             mastered: false,
-                            lastReviewed: null
+                            lastReviewed: null,
+                            storageLevel: 'weak',
+                            reviewCount: 0,
+                            correctAnswers: 0
                         });
                     }
                 }
@@ -2188,12 +2345,14 @@
                 return;
             }
 
+            const fragment = document.createDocumentFragment();
+
             filteredCards.forEach(card => {
                 const flashcardElement = createFlashcardElement(card);
-                container.appendChild(flashcardElement);
+                fragment.appendChild(flashcardElement);
             });
 
-            updateCategoryFilter();
+            container.appendChild(fragment);
         }
 
         function createFlashcardElement(card) {
@@ -2201,21 +2360,64 @@
             flashcardElement.className = 'flashcard';
             flashcardElement.dataset.id = card.id;
 
+            // تحديد الألوان بناءً على مستوى الحفظ
+            let frontColor, backColor, frontIcon, backIcon;
+
+            switch (card.storageLevel) {
+                case 'strong':
+                    frontColor = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                    backColor = 'linear-gradient(135deg, #229954, #27ae60)';
+                    frontIcon = 'fas fa-star';
+                    backIcon = 'fas fa-check-circle';
+                    break;
+                case 'medium':
+                    frontColor = 'linear-gradient(135deg, #f39c12, #f1c40f)';
+                    backColor = 'linear-gradient(135deg, #e67e22, #f39c12)';
+                    frontIcon = 'fas fa-star-half-alt';
+                    backIcon = 'fas fa-adjust';
+                    break;
+                default: // weak
+                    frontColor = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                    backColor = 'linear-gradient(135deg, #c0392b, #a93226)';
+                    frontIcon = 'fa-regular fa-star'; // تصحيح هنا
+                    backIcon = 'fas fa-times-circle';
+            }
+
             flashcardElement.innerHTML = `
                 <div class="flashcard-inner">
-                    <div class="flashcard-front">
+                    <div class="flashcard-front" style="background: ${frontColor};">
                         <h3>${card.word}</h3>
-                        ${card.category ? `<span class="category">${card.category}</span>` : ''}
+                        <div class="storage-indicator">
+                            <i class="${frontIcon}"></i>
+                        </div>
                     </div>
-                    <div class="flashcard-back">
+                    <div class="flashcard-back" style="background: ${backColor};">
                         <h3>${card.translation}</h3>
-                        ${card.category ? `<span class="category">${card.category}</span>` : ''}
+                        <div class="storage-indicator">
+                            <i class="${backIcon}"></i>
+                        </div>
                     </div>
+                </div>
+                
+                <!-- أزرار تغيير مستوى الحفظ -->
+                <div class="storage-controls">
+                    <button class="storage-btn weak" onclick="changeStorageLevel(${card.id}, 'weak')" title="ضعيف">
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                    <button class="storage-btn medium" onclick="changeStorageLevel(${card.id}, 'medium')" title="متوسط">
+                        <i class="fas fa-adjust"></i>
+                    </button>
+                    <button class="storage-btn strong" onclick="changeStorageLevel(${card.id}, 'strong')" title="ممتاز">
+                        <i class="fas fa-check-circle"></i>
+                    </button>
                 </div>
             `;
 
             // استخدام أحداث اللمس للموبايل وأحداث النقر للكمبيوتر
             flashcardElement.addEventListener('click', (e) => {
+                // تجاهل النقر إذا كان على أزرار التحكم
+                if (e.target.closest('.storage-controls')) return;
+
                 e.preventDefault();
                 flipCard(flashcardElement);
                 markAsReviewed(card);
@@ -2228,12 +2430,37 @@
             });
 
             flashcardElement.addEventListener('touchend', (e) => {
+                // تجاهل اللمس إذا كان على أزرار التحكم
+                if (e.target.closest('.storage-controls')) return;
+
                 e.preventDefault();
                 flipCard(flashcardElement);
                 markAsReviewed(card);
             });
 
             return flashcardElement;
+        }
+
+        function changeStorageLevel(cardId, level) {
+            const card = flashcards.find(c => c.id === cardId);
+            if (!card) return;
+
+            const oldLevel = card.storageLevel;
+            card.storageLevel = level;
+
+            // تحديث حالة الإتقان إذا كان المستوى ممتاز
+            if (level === 'strong') {
+                card.mastered = true;
+            } else if (oldLevel === 'strong') {
+                card.mastered = false;
+            }
+
+            saveData();
+            displayFlashcards();
+            updateStats();
+
+            const levelText = getStorageLevelText(level);
+            showNotification(`تم تغيير مستوى حفظ "${card.word}" إلى ${levelText}`);
         }
 
         function flipCard(cardElement) {
@@ -2247,6 +2474,7 @@
 
         function markAsReviewed(card) {
             card.lastReviewed = new Date().toISOString();
+            card.reviewCount = (card.reviewCount || 0) + 1;
 
             // زيادة التقدم اليومي
             studyStats.dailyProgress++;
@@ -2256,37 +2484,16 @@
         }
 
         // ===== وظائف الفلترة والبحث =====
-        function updateCategoryFilter() {
-            const categories = [...new Set(flashcards.map(card => card.category).filter(cat => cat))];
-            const filter = document.getElementById('categoryFilter');
-
-            // حفظ القيمة المحددة حالياً
-            const currentValue = filter.value;
-
-            // إعادة تعبئة القائمة
-            filter.innerHTML = '<option value="all">كل الفئات</option>';
-
-            categories.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category;
-                option.textContent = category;
-                filter.appendChild(option);
-            });
-
-            // استعادة القيمة المحددة
-            filter.value = currentValue;
-        }
-
         function filterCards() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const category = document.getElementById('categoryFilter').value;
+            const storageLevel = document.getElementById('storageLevelFilter').value;
 
             filteredCards = flashcards.filter(card => {
                 const matchesSearch = card.word.toLowerCase().includes(searchTerm) ||
                     card.translation.toLowerCase().includes(searchTerm);
-                const matchesCategory = category === 'all' || card.category === category;
+                const matchesStorageLevel = storageLevel === 'all' || card.storageLevel === storageLevel;
 
-                return matchesSearch && matchesCategory;
+                return matchesSearch && matchesStorageLevel;
             });
 
             displayFlashcards();
@@ -2302,7 +2509,7 @@
         function resetCards() {
             filteredCards = [...flashcards];
             document.getElementById('searchInput').value = '';
-            document.getElementById('categoryFilter').value = 'all';
+            document.getElementById('storageLevelFilter').value = 'all';
             displayFlashcards();
             updateWordsCounter();
             showNotification('تم إعادة تعيين العرض');
@@ -2500,6 +2707,22 @@
                 element.classList.add('correct');
                 currentQuiz.score++;
 
+                // تحديث إحصائيات الكلمة
+                const card = flashcards.find(c => c.word === question.word);
+                if (card) {
+                    card.correctAnswers = (card.correctAnswers || 0) + 1;
+
+                    // ترقية مستوى الحفظ إذا كانت الإجابة صحيحة
+                    if (card.correctAnswers >= 3 && card.storageLevel === 'weak') {
+                        card.storageLevel = 'medium';
+                        showNotification(`تم ترقية "${card.word}" إلى مستوى متوسط`, 'success');
+                    } else if (card.correctAnswers >= 5 && card.storageLevel === 'medium') {
+                        card.storageLevel = 'strong';
+                        card.mastered = true;
+                        showNotification(`تم ترقية "${card.word}" إلى مستوى ممتاز`, 'success');
+                    }
+                }
+
                 // تشغيل صوت الإجابة الصحيحة
                 if (getSetting('soundEnabled') !== false) {
                     playSound('correct');
@@ -2614,11 +2837,19 @@
 
         function updateStatsDisplay() {
             document.getElementById('totalWords').textContent = studyStats.totalWords;
-            document.getElementById('masteredWords').textContent = studyStats.masteredWords;
+
+            const strongWords = flashcards.filter(card => card.storageLevel === 'strong').length;
+            const mediumWords = flashcards.filter(card => card.storageLevel === 'medium').length;
+            const weakWords = flashcards.filter(card => card.storageLevel === 'weak').length;
+
+            document.getElementById('strongWords').textContent = strongWords;
+            document.getElementById('mediumWords').textContent = mediumWords;
+            document.getElementById('weakWords').textContent = weakWords;
+
             document.getElementById('studyTime').textContent = formatTime(studyStats.studyTime);
 
             const masteryRate = studyStats.totalWords > 0 ?
-                Math.round((studyStats.masteredWords / studyStats.totalWords) * 100) : 0;
+                Math.round((strongWords / studyStats.totalWords) * 100) : 0;
             document.getElementById('masteryRate').textContent = masteryRate + '%';
 
             // تحديث شريط التقدم اليومي
@@ -2649,20 +2880,29 @@
         function updateChart() {
             const ctx = document.getElementById('progressChart').getContext('2d');
 
-            // محاكاة بيانات الرسم البياني
-            const labels = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-            const data = [12, 19, 15, 25, 22, 30, 28];
+            // حساب الكلمات حسب مستوى الحفظ
+            const strongWords = flashcards.filter(card => card.storageLevel === 'strong').length;
+            const mediumWords = flashcards.filter(card => card.storageLevel === 'medium').length;
+            const weakWords = flashcards.filter(card => card.storageLevel === 'weak').length;
 
             new Chart(ctx, {
-                type: 'line',
+                type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: ['ممتاز', 'متوسط', 'ضعيف'],
                     datasets: [{
-                        label: 'الكلمات المحفوظة',
-                        data: data,
-                        borderColor: 'rgb(52, 152, 219)',
-                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                        tension: 0.4
+                        label: 'عدد الكلمات',
+                        data: [strongWords, mediumWords, weakWords],
+                        backgroundColor: [
+                            'rgba(46, 204, 113, 0.8)',
+                            'rgba(243, 156, 18, 0.8)',
+                            'rgba(231, 76, 60, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(46, 204, 113, 1)',
+                            'rgba(243, 156, 18, 1)',
+                            'rgba(231, 76, 60, 1)'
+                        ],
+                        borderWidth: 2
                     }]
                 },
                 options: {
@@ -2671,7 +2911,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'تقدمك الأسبوعي',
+                            text: 'توزيع الكلمات حسب مستوى الحفظ',
                             font: {
                                 family: 'Cairo',
                                 size: 16,
@@ -2679,12 +2919,7 @@
                             }
                         },
                         legend: {
-                            labels: {
-                                font: {
-                                    family: 'Cairo',
-                                    size: 14
-                                }
-                            }
+                            display: false
                         }
                     },
                     scales: {
@@ -2694,14 +2929,16 @@
                                 font: {
                                     family: 'Cairo',
                                     size: 14
-                                }
+                                },
+                                stepSize: 1
                             }
                         },
                         x: {
                             ticks: {
                                 font: {
                                     family: 'Cairo',
-                                    size: 14
+                                    size: 14,
+                                    weight: 'bold'
                                 }
                             }
                         }
@@ -2740,21 +2977,61 @@
         }
 
         function exportData() {
-            const data = {
-                flashcards: flashcards,
-                stats: studyStats,
-                exportDate: new Date().toISOString()
-            };
+            // إنشاء ورقة عمل للكلمات
+            const wordsData = flashcards.map(card => ({
+                'الكلمة': card.word,
+                'الترجمة': card.translation,
+                'مستوى الحفظ': getStorageLevelText(card.storageLevel),
+                'ممتازة': card.mastered ? 'نعم' : 'لا',
+                'عدد المراجعات': card.reviewCount || 0,
+                'الإجابات الصحيحة': card.correctAnswers || 0,
+                'آخر مراجعة': card.lastReviewed ? new Date(card.lastReviewed).toLocaleDateString('ar-SA') : 'لم تتم المراجعة'
+            }));
 
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `flashcards_backup_${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
+            // إنشاء ورقة عمل للإحصائيات
+            const statsData = [
+                { 'المؤشر': 'إجمالي الكلمات', 'القيمة': studyStats.totalWords },
+                { 'المؤشر': 'الكلمات المحفوظة', 'القيمة': studyStats.masteredWords },
+                { 'المؤشر': 'وقت الدراسة (دقيقة)', 'القيمة': studyStats.studyTime },
+                { 'المؤشر': 'نسبة الإتقان (%)', 'القيمة': studyStats.totalWords > 0 ? Math.round((studyStats.masteredWords / studyStats.totalWords) * 100) : 0 },
+                { 'المؤشر': 'التقدم اليومي', 'القيمة': studyStats.dailyProgress },
+                { 'المؤشر': 'تاريخ التصدير', 'القيمة': new Date().toLocaleDateString('ar-SA') + ' ' + new Date().toLocaleTimeString('ar-SA') }
+            ];
 
-            showNotification('تم تصدير البيانات بنجاح');
+            // إنشاء مصنف Excel
+            const wb = XLSX.utils.book_new();
+
+            // إضافة ورقة الكلمات
+            const wordsWs = XLSX.utils.json_to_sheet(wordsData);
+            XLSX.utils.book_append_sheet(wb, wordsWs, "الكلمات");
+
+            // إضافة ورقة الإحصائيات
+            const statsWs = XLSX.utils.json_to_sheet(statsData);
+            XLSX.utils.book_append_sheet(wb, statsWs, "الإحصائيات");
+
+            // تعديل عرض الأعمدة لتناسب المحتوى
+            const wordsColWidths = [
+                { wch: 20 }, // الكلمة
+                { wch: 20 }, // الترجمة
+                { wch: 15 }, // مستوى الحفظ
+                { wch: 10 }, // ممتازة
+                { wch: 15 }, // عدد المراجعات
+                { wch: 15 }, // الإجابات الصحيحة
+                { wch: 20 }  // آخر مراجعة
+            ];
+            wordsWs['!cols'] = wordsColWidths;
+
+            const statsColWidths = [
+                { wch: 20 }, // المؤشر
+                { wch: 15 }  // القيمة
+            ];
+            statsWs['!cols'] = statsColWidths;
+
+            // تصدير الملف
+            const fileName = `flashcards_backup_${new Date().toISOString().split('T')[0]}.xlsx`;
+            XLSX.writeFile(wb, fileName);
+
+            showNotification('تم تصدير البيانات إلى ملف Excel بنجاح');
         }
 
         function clearData() {
@@ -2829,8 +3106,22 @@
         }
 
         function saveData() {
-            localStorage.setItem('flashcards', JSON.stringify(flashcards));
-            localStorage.setItem('studyStats', JSON.stringify(studyStats));
+            try {
+                localStorage.setItem('flashcards', JSON.stringify(flashcards));
+                localStorage.setItem('studyStats', JSON.stringify(studyStats));
+                localStorage.setItem('flashcardSettings', JSON.stringify(getSettings()));
+            } catch (e) {
+                console.error('Error saving data:', e);
+                showNotification('حدث خطأ أثناء حفظ البيانات', 'error');
+            }
+        }
+
+        function validateCard(card) {
+            return card.word && card.translation &&
+                typeof card.word === 'string' &&
+                typeof card.translation === 'string' &&
+                card.word.trim() !== '' &&
+                card.translation.trim() !== '';
         }
     </script>
 </body>
