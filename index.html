@@ -1581,27 +1581,27 @@
             <section id="home" class="content-section active">
                 <div class="section-header">
                     <h1>مكتبة flashcard</h1>
-                    <p>تعلم الكلمات الجديدة بسهولة وفعالية</p>
+                    <p>تعلم التعبيرات الإسبانية بسهولة وفعالية</p>
                 </div>
 
                 <div style="text-align: center;">
                     <div class="words-counter" id="wordsCounter">
                         <i class="fas fa-layer-group"></i>
-                        <span id="totalWordsCount">0</span> كلمة
+                        <span id="totalWordsCount">0</span> تعبير
                     </div>
                 </div>
 
                 <div class="controls">
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="بحث في الكلمات...">
+                        <input type="text" id="searchInput" placeholder="بحث في التعبيرات...">
                     </div>
                     <div class="filter-options">
                         <select id="storageLevelFilter">
                             <option value="all">كل المستويات</option>
-                            <option value="weak">ضعيف</option>
+                            <option value="weak">مبتدئ</option>
                             <option value="medium">متوسط</option>
-                            <option value="strong">ممتاز</option>
+                            <option value="strong">متقدم</option>
                         </select>
                         <button id="shuffleBtn">
                             <i class="fas fa-random"></i> عشوائي
@@ -1619,7 +1619,7 @@
             <section id="quiz" class="content-section">
                 <div class="section-header">
                     <h1>وضعية الاختبار</h1>
-                    <p>اختبر معرفتك بالكلمات والترجمات</p>
+                    <p>اختبر معرفتك بالتعبيرات الإسبانية</p>
                 </div>
 
                 <div class="quiz-container">
@@ -1627,13 +1627,13 @@
                     <div class="quiz-setup" id="quizSetup">
                         <h3>إعدادات الاختبار</h3>
                         <div class="quiz-setup-options">
-                            <label>عدد الكلمات:</label>
+                            <label>عدد التعبيرات:</label>
                             <select id="quizWordCount">
-                                <option value="5">5 كلمات</option>
-                                <option value="10" selected>10 كلمات</option>
-                                <option value="15">15 كلمة</option>
-                                <option value="20">20 كلمة</option>
-                                <option value="all">كل الكلمات</option>
+                                <option value="5">5 تعبيرات</option>
+                                <option value="10" selected>10 تعبيرات</option>
+                                <option value="15">15 تعبيراً</option>
+                                <option value="20">20 تعبيراً</option>
+                                <option value="all">كل التعبيرات</option>
                             </select>
                             <label>مدة كل سؤال:</label>
                             <select id="quizTimer">
@@ -1696,22 +1696,22 @@
                 <div class="stats-grid">
                     <div class="stat-card">
                         <i class="fas fa-book"></i>
-                        <h3>إجمالي الكلمات</h3>
+                        <h3>إجمالي التعبيرات</h3>
                         <span id="totalWords">0</span>
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-star"></i>
-                        <h3>كلمات ممتازة</h3>
+                        <h3>تعبيرات متقدمة</h3>
                         <span id="strongWords">0</span>
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-star-half-alt"></i>
-                        <h3>كلمات متوسطة</h3>
+                        <h3>تعبيرات متوسطة</h3>
                         <span id="mediumWords">0</span>
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-times-circle"></i>
-                        <h3>كلمات ضعيفة</h3>
+                        <h3>تعبيرات مبتدئة</h3>
                         <span id="weakWords">0</span>
                     </div>
                 </div>
@@ -1721,7 +1721,7 @@
                     <div class="progress-bar">
                         <div class="progress-fill" id="dailyProgress"></div>
                     </div>
-                    <p>هدف اليوم: <span id="dailyGoal">20</span> كلمة</p>
+                    <p>هدف اليوم: <span id="dailyGoal">20</span> تعبيراً</p>
                 </div>
 
                 <div class="chart-container">
@@ -1738,12 +1738,12 @@
 
                 <!-- قسم إدارة الكلمات -->
                 <div class="word-management">
-                    <h3><i class="fas fa-edit"></i> إدارة الكلمات</h3>
+                    <h3><i class="fas fa-edit"></i> إدارة التعبيرات</h3>
                     <div class="add-word-form">
-                        <input type="text" id="newWord" placeholder="الكلمة">
-                        <input type="text" id="newTranslation" placeholder="الترجمة">
+                        <input type="text" id="newWord" placeholder="التعبير الإسباني">
+                        <input type="text" id="newTranslation" placeholder="الترجمة العربية">
                         <button class="primary-btn" onclick="addWord()">
-                            <i class="fas fa-plus"></i> إضافة كلمة
+                            <i class="fas fa-plus"></i> إضافة تعبير
                         </button>
                     </div>
                     <div class="word-list" id="wordList"></div>
@@ -1760,7 +1760,7 @@
                         <button class="upload-btn" onclick="document.getElementById('csvFile').click()">
                             اختر ملف
                         </button>
-                        <p class="file-info">يدعم ملفات CSV و Excel (صيغة: كلمة,ترجمة)</p>
+                        <p class="file-info">يدعم ملفات CSV و Excel (صيغة: تعبير,ترجمة)</p>
                     </div>
                 </div>
 
@@ -1801,7 +1801,7 @@
                     <div class="setting-card">
                         <h3><i class="fas fa-brain"></i> خيارات التعلم</h3>
                         <div class="setting-option">
-                            <label>عدد الكلمات اليومية</label>
+                            <label>عدد التعبيرات اليومية</label>
                             <input type="number" id="dailyWordsGoal" value="20" min="5" max="100">
                         </div>
                         <div class="setting-option">
@@ -1845,10 +1845,10 @@
     <div id="editModal" class="modal edit-modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>تعديل الكلمة</h2>
+            <h2>تعديل التعبير</h2>
             <div class="edit-form">
-                <input type="text" id="editWord" placeholder="الكلمة">
-                <input type="text" id="editTranslation" placeholder="الترجمة">
+                <input type="text" id="editWord" placeholder="التعبير الإسباني">
+                <input type="text" id="editTranslation" placeholder="الترجمة العربية">
                 <div class="edit-form-buttons">
                     <button class="primary-btn" onclick="saveEditWord()">حفظ</button>
                     <button class="secondary-btn" onclick="closeEditModal()">إلغاء</button>
@@ -1874,23 +1874,155 @@
         let answerSelected = false;
         let editingCardId = null;
 
-        // ===== الكلمات الافتراضية =====
+        // ===== الكلمات الافتراضية - تعبيرات إسبانية-عربية =====
         const defaultWords = [
-            { word: "Hello", translation: "مرحبا", storageLevel: 'weak' },
-            { word: "Goodbye", translation: "وداعا", storageLevel: 'weak' },
-            { word: "Thank you", translation: "شكرا", storageLevel: 'medium' },
-            { word: "Please", translation: "من فضلك", storageLevel: 'medium' },
-            { word: "Sorry", translation: "آسف", storageLevel: 'strong' },
-            { word: "Yes", translation: "نعم", storageLevel: 'strong' },
-            { word: "No", translation: "لا", storageLevel: 'strong' },
-            { word: "Water", translation: "ماء", storageLevel: 'medium' },
-            { word: "Food", translation: "طعام", storageLevel: 'weak' },
-            { word: "House", translation: "منزل", storageLevel: 'medium' },
-            { word: "Car", translation: "سيارة", storageLevel: 'weak' },
-            { word: "Book", translation: "كتاب", storageLevel: 'strong' },
-            { word: "Friend", translation: "صديق", storageLevel: 'medium' },
-            { word: "Family", translation: "عائلة", storageLevel: 'strong' },
-            { word: "Love", translation: "حب", storageLevel: 'strong' }
+            { word: "Hola", translation: "مرحبا", storageLevel: 'weak' },
+            { word: "Buenos días", translation: "صباح الخير", storageLevel: 'weak' },
+            { word: "Buenas tardes", translation: "مساء الخير", storageLevel: 'medium' },
+            { word: "Buenas noches", translation: "طاب مساؤك", storageLevel: 'medium' },
+            { word: "Por favor", translation: "من فضلك", storageLevel: 'strong' },
+            { word: "Gracias", translation: "شكرا", storageLevel: 'strong' },
+            { word: "De nada", translation: "على الرحب والسعة", storageLevel: 'strong' },
+            { word: "Lo siento", translation: "آسف", storageLevel: 'medium' },
+            { word: "¿Cómo estás?", translation: "كيف حالك؟", storageLevel: 'medium' },
+            { word: "Estoy bien", translation: "أنا بخير", storageLevel: 'medium' },
+            { word: "¿Y tú?", translation: "وأنتم؟", storageLevel: 'weak' },
+            { word: "Mucho gusto", translation: "تشرفت بلقائك", storageLevel: 'strong' },
+            { word: "Hasta luego", translation: "إلى اللقاء", storageLevel: 'medium' },
+            { word: "Adiós", translation: "وداعا", storageLevel: 'strong' },
+            { word: "Te quiero", translation: "أحبك", storageLevel: 'strong' },
+            { word: "Te amo", translation: "أنا أحبك", storageLevel: 'strong' },
+            { word: "¿Qué tal?", translation: "ما أخبارك؟", storageLevel: 'medium' },
+            { word: "No entiendo", translation: "لا أفهم", storageLevel: 'weak' },
+            { word: "¿Hablas inglés?", translation: "هل تتحدث الإنجليزية؟", storageLevel: 'medium' },
+            { word: "¿Dónde está el baño?", translation: "أين الحمام؟", storageLevel: 'weak' },
+            { word: "¿Cuánto cuesta?", translation: "كم الثمن؟", storageLevel: 'medium' },
+            { word: "Me gusta", translation: "أنا أحب", storageLevel: 'strong' },
+            { word: "No me gusta", translation: "لا أحب", storageLevel: 'medium' },
+            { word: "Encantado", translation: "تشرفت", storageLevel: 'strong' },
+            { word: "Feliz cumpleaños", translation: "عيد ميلاد سعيد", storageLevel: 'medium' },
+            { word: "Buen provecho", translation: "بالهناء والشفاء", storageLevel: 'weak' },
+            { word: "Salud", translation: "صحة", storageLevel: 'weak' },
+            { word: "¡Qué bueno!", translation: "ماذا أروع!", storageLevel: 'medium' },
+            { word: "¡Qué lástima!", translation: "للأسف!", storageLevel: 'medium' },
+            { word: "No hay problema", translation: "لا توجد مشكلة", storageLevel: 'strong' },
+            { word: "Claro que sí", translation: "بالتأكيد", storageLevel: 'strong' },
+            { word: "¡Vamos!", translation: "هيا بنا!", storageLevel: 'medium' },
+            { word: "¡Ayuda!", translation: "ساعد!", storageLevel: 'weak' },
+            { word: "Cuidado", translation: "انتبه", storageLevel: 'weak' },
+            { word: "Tranquilo", translation: "هادئ", storageLevel: 'medium' },
+            { word: "Rápido", translation: "سريع", storageLevel: 'medium' },
+            { word: "Despacio", translation: "ببطء", storageLevel: 'medium' },
+            { word: "Ahora", translation: "الآن", storageLevel: 'strong' },
+            { word: "Después", translation: "بعد ذلك", storageLevel: 'medium' },
+            { word: "Siempre", translation: "دائما", storageLevel: 'strong' },
+            { word: "Nunca", translation: "أبدا", storageLevel: 'medium' },
+            { word: "A veces", translation: "أحيانا", storageLevel: 'medium' },
+            { word: "Hoy", translation: "اليوم", storageLevel: 'strong' },
+            { word: "Mañana", translation: "غدا", storageLevel: 'strong' },
+            { word: "Ayer", translation: "أمس", storageLevel: 'medium' },
+            { word: "La semana pasada", translation: "الأسبوع الماضي", storageLevel: 'weak' },
+            { word: "El mes próximo", translation: "الشهر القادم", storageLevel: 'weak' },
+            { word: "El año pasado", translation: "العام الماضي", storageLevel: 'medium' },
+            { word: "¿Qué hora es?", translation: "كم الساعة؟", storageLevel: 'medium' },
+            { word: "Es la una", translation: "الساعة الواحدة", storageLevel: 'weak' },
+            { word: "Son las dos", translation: "الساعة الثانية", storageLevel: 'weak' },
+            { word: "En punto", translation: "تماما", storageLevel: 'weak' },
+            { word: "Y media", translation: "ونصف", storageLevel: 'medium' },
+            { word: "Y cuarto", translation: "وربع", storageLevel: 'medium' },
+            { word: "Menos cuarto", translation: "إلا ربع", storageLevel: 'weak' },
+            { word: "De la mañana", translation: "صباحا", storageLevel: 'medium' },
+            { word: "De la tarde", translation: "بعد الظهر", storageLevel: 'medium' },
+            { word: "De la noche", translation: "ليلا", storageLevel: 'medium' },
+            { word: "La medianoche", translation: "منتصف الليل", storageLevel: 'weak' },
+            { word: "El mediodía", translation: "الظهر", storageLevel: 'weak' },
+            { word: "La madrugada", translation: "الفجر", storageLevel: 'weak' },
+            { word: "El amanecer", translation: "شروق الشمس", storageLevel: 'weak' },
+            { word: "El atardecer", translation: "غروب الشمس", storageLevel: 'weak' },
+            { word: "La noche", translation: "الليل", storageLevel: 'strong' },
+            { word: "El día", translation: "اليوم", storageLevel: 'strong' },
+            { word: "La semana", translation: "الأسبوع", storageLevel: 'medium' },
+            { word: "El mes", translation: "الشهر", storageLevel: 'medium' },
+            { word: "El año", translation: "العام", storageLevel: 'medium' },
+            { word: "La estación", translation: "الفصل", storageLevel: 'weak' },
+            { word: "La primavera", translation: "الربيع", storageLevel: 'weak' },
+            { word: "El verano", translation: "الصيف", storageLevel: 'medium' },
+            { word: "El otoño", translation: "الخريف", storageLevel: 'weak' },
+            { word: "El invierno", translation: "الشتاء", storageLevel: 'medium' },
+            { word: "El tiempo", translation: "الطقس", storageLevel: 'medium' },
+            { word: "Hace sol", translation: "الشمس مشرقة", storageLevel: 'medium' },
+            { word: "Hace frío", translation: "الجو بارد", storageLevel: 'medium' },
+            { word: "Hace calor", translation: "الجو حار", storageLevel: 'medium' },
+            { word: "Llueve", translation: "تمطر", storageLevel: 'weak' },
+            { word: "Nieva", translation: "تثلج", storageLevel: 'weak' },
+            { word: "Hay viento", translation: "هناك رياح", storageLevel: 'weak' },
+            { word: "Está nublado", translation: "الجو غائم", storageLevel: 'weak' },
+            { word: "El arco iris", translation: "قوس قزح", storageLevel: 'weak' },
+            { word: "La tormenta", translation: "العاصفة", storageLevel: 'weak' },
+            { word: "La familia", translation: "العائلة", storageLevel: 'strong' },
+            { word: "Los padres", translation: "الوالدان", storageLevel: 'medium' },
+            { word: "La madre", translation: "الأم", storageLevel: 'strong' },
+            { word: "El padre", translation: "الأب", storageLevel: 'strong' },
+            { word: "Los hijos", translation: "الأبناء", storageLevel: 'medium' },
+            { word: "El hijo", translation: "الابن", storageLevel: 'medium' },
+            { word: "La hija", translation: "الابنة", storageLevel: 'medium' },
+            { word: "Los hermanos", translation: "الإخوة", storageLevel: 'medium' },
+            { word: "El hermano", translation: "الأخ", storageLevel: 'medium' },
+            { word: "La hermana", translation: "الأخت", storageLevel: 'medium' },
+            { word: "Los abuelos", translation: "الأجداد", storageLevel: 'weak' },
+            { word: "El abuelo", translation: "الجد", storageLevel: 'weak' },
+            { word: "La abuela", translation: "الجدة", storageLevel: 'weak' },
+            { word: "Los tíos", translation: "الأعمام/العمات", storageLevel: 'weak' },
+            { word: "El tío", translation: "العم/الخال", storageLevel: 'weak' },
+            { word: "La tía", translation: "العمة/الخالة", storageLevel: 'weak' },
+            { word: "Los primos", translation: "أبناء العم/الخال", storageLevel: 'weak' },
+            { word: "El primo", translation: "ابن العم/الخال", storageLevel: 'weak' },
+            { word: "La prima", translation: "بنت العم/الخالة", storageLevel: 'weak' },
+            { word: "El sobrino", translation: "ابن الأخ/الأخت", storageLevel: 'weak' },
+            { word: "La sobrina", translation: "بنت الأخ/الأخت", storageLevel: 'weak' },
+            { word: "El esposo", translation: "الزوج", storageLevel: 'medium' },
+            { word: "La esposa", translation: "الزوجة", storageLevel: 'medium' },
+            { word: "El novio", translation: "الخطيب", storageLevel: 'medium' },
+            { word: "La novia", translation: "الخطيبة", storageLevel: 'medium' },
+            { word: "El amigo", translation: "الصديق", storageLevel: 'strong' },
+            { word: "La amiga", translation: "الصديقة", storageLevel: 'strong' },
+            { word: "El compañero", translation: "الزميل", storageLevel: 'medium' },
+            { word: "La compañera", translation: "الزميلة", storageLevel: 'medium' },
+            { word: "El vecino", translation: "الجار", storageLevel: 'weak' },
+            { word: "La vecina", translation: "الجارة", storageLevel: 'weak' },
+            { word: "La casa", translation: "المنزل", storageLevel: 'strong' },
+            { word: "El apartamento", translation: "الشقة", storageLevel: 'medium' },
+            { word: "La habitación", translation: "الغرفة", storageLevel: 'medium' },
+            { word: "El dormitorio", translation: "غرفة النوم", storageLevel: 'medium' },
+            { word: "La cocina", translation: "المطبخ", storageLevel: 'medium' },
+            { word: "El baño", translation: "الحمام", storageLevel: 'strong' },
+            { word: "La sala de estar", translation: "غرفة المعيشة", storageLevel: 'medium' },
+            { word: "El comedor", translation: "غرفة الطعام", storageLevel: 'weak' },
+            { word: "El jardín", translation: "الحديقة", storageLevel: 'medium' },
+            { word: "El garaje", translation: "المرآب", storageLevel: 'weak' },
+            { word: "El ático", translation: "العلية", storageLevel: 'weak' },
+            { word: "El sótano", translation: "القبو", storageLevel: 'weak' },
+            { word: "La puerta", translation: "الباب", storageLevel: 'medium' },
+            { word: "La ventana", translation: "النافذة", storageLevel: 'medium' },
+            { word: "La pared", translation: "الحائط", storageLevel: 'weak' },
+            { word: "El suelo", translation: "الأرضية", storageLevel: 'weak' },
+            { word: "El techo", translation: "السقف", storageLevel: 'weak' },
+            { word: "La escalera", translation: "السلالم", storageLevel: 'weak' },
+            { word: "El ascensor", translation: "المصعد", storageLevel: 'weak' },
+            { word: "La llave", translation: "المفتاح", storageLevel: 'medium' },
+            { word: "La cama", translation: "السرير", storageLevel: 'medium' },
+            { word: "La mesa", translation: "الطاولة", storageLevel: 'strong' },
+            { word: "La silla", translation: "الكرسي", storageLevel: 'strong' },
+            { word: "El sofá", translation: "الأريكة", storageLevel: 'medium' },
+            { word: "La lámpara", translation: "المصباح", storageLevel: 'medium' },
+            { word: "El televisor", translation: "التلفزيون", storageLevel: 'medium' },
+            { word: "El ordenador", translation: "الحاسوب", storageLevel: 'medium' },
+            { word: "El móvil", translation: "الهاتف المحمول", storageLevel: 'strong' },
+            { word: "La nevera", translation: "الثلاجة", storageLevel: 'medium' },
+            { word: "El horno", translation: "الفرن", storageLevel: 'weak' },
+            { word: "El microondas", translation: "الميكروويف", storageLevel: 'weak' },
+            { word: "La lavadora", translation: "غسالة الملابس", storageLevel: 'weak' },
+            { word: "El lavavajillas", translation: "غسالة الأطباق", storageLevel: 'weak' }
         ];
 
         // ===== تهيئة التطبيق =====
@@ -1939,7 +2071,7 @@
                     flashcards = [...defaultWords];
                     localStorage.setItem('flashcards', JSON.stringify(flashcards));
                     localStorage.setItem('isFirstVisit', 'true');
-                    showNotification('تمت إضافة كلمات افتراضية للمساعدة في البدء');
+                    showNotification('تمت إضافة تعبيرات افتراضية للمساعدة في البدء');
                 }
 
                 if (savedStats) {
@@ -2079,7 +2211,7 @@
             const translation = document.getElementById('newTranslation').value.trim();
 
             if (!word || !translation) {
-                showNotification('يرجى إدخال الكلمة والترجمة', 'error');
+                showNotification('يرجى إدخال التعبير والترجمة', 'error');
                 return;
             }
 
@@ -2090,7 +2222,7 @@
             );
 
             if (existingCard) {
-                showNotification('هذه الكلمة موجودة بالفعل', 'error');
+                showNotification('هذا التعبير موجود بالفعل', 'error');
                 return;
             }
 
@@ -2117,7 +2249,7 @@
             displayWordList();
             updateStats();
             updateWordsCounter();
-            showNotification('تمت إضافة الكلمة بنجاح');
+            showNotification('تمت إضافة التعبير بنجاح');
         }
 
         function displayWordList() {
@@ -2125,7 +2257,7 @@
             wordList.innerHTML = '';
 
             if (flashcards.length === 0) {
-                wordList.innerHTML = '<p style="text-align: center; color: #7f8c8d; padding: 1rem;">لا توجد كلمات مضافة بعد</p>';
+                wordList.innerHTML = '<p style="text-align: center; color: #7f8c8d; padding: 1rem;">لا توجد تعبيرات مضافة بعد</p>';
                 return;
             }
 
@@ -2139,7 +2271,7 @@
                         <div class="word-text">${card.word}</div>
                         <div class="word-translation">${card.translation}</div>
                         <small style="color: #7f8c8d; margin-right: 10px;">
-                            <i class="fas fa-star" style="color: ${getStorageLevelColor(card.storageLevel)}"></i>
+                            <i class="${getStorageLevelIcon(card.storageLevel)}" style="color: ${getStorageLevelColor(card.storageLevel)}"></i>
                         </small>
                     </div>
                     <div class="word-actions">
@@ -2157,6 +2289,14 @@
             wordList.appendChild(fragment);
         }
 
+        function getStorageLevelIcon(level) {
+            switch (level) {
+                case 'strong': return 'fas fa-trophy';
+                case 'medium': return 'fas fa-medal';
+                default: return 'fas fa-seedling';
+            }
+        }
+
         function getStorageLevelColor(level) {
             switch (level) {
                 case 'strong': return '#27ae60';
@@ -2167,9 +2307,9 @@
 
         function getStorageLevelText(level) {
             switch (level) {
-                case 'strong': return 'ممتاز';
+                case 'strong': return 'متقدم';
                 case 'medium': return 'متوسط';
-                default: return 'ضعيف';
+                default: return 'مبتدئ';
             }
         }
 
@@ -2191,7 +2331,7 @@
             const translation = document.getElementById('editTranslation').value.trim();
 
             if (!word || !translation) {
-                showNotification('يرجى إدخال الكلمة والترجمة', 'error');
+                showNotification('يرجى إدخال التعبير والترجمة', 'error');
                 return;
             }
 
@@ -2208,7 +2348,7 @@
                 displayFlashcards();
                 displayWordList();
                 updateStats();
-                showNotification('تم تعديل الكلمة بنجاح');
+                showNotification('تم تعديل التعبير بنجاح');
             }
 
             closeEditModal();
@@ -2220,7 +2360,7 @@
         }
 
         function deleteWord(cardId) {
-            if (confirm('هل أنت متأكد من حذف هذه الكلمة؟')) {
+            if (confirm('هل أنت متأكد من حذف هذا التعبير؟')) {
                 flashcards = flashcards.filter(card => card.id !== cardId);
                 filteredCards = [...flashcards];
 
@@ -2229,7 +2369,7 @@
                 displayWordList();
                 updateStats();
                 updateWordsCounter();
-                showNotification('تم حذف الكلمة بنجاح');
+                showNotification('تم حذف التعبير بنجاح');
             }
         }
 
@@ -2267,7 +2407,7 @@
             const newCards = [];
 
             // تخطي السطر الأول إذا كان يحتوي على عناوين
-            const startIndex = lines[0].includes('word') || lines[0].includes('كلمة') ? 1 : 0;
+            const startIndex = lines[0].includes('word') || lines[0].includes('كلمة') || lines[0].includes('تعبير') ? 1 : 0;
 
             for (let i = startIndex; i < lines.length; i++) {
                 const line = lines[i].trim();
@@ -2301,7 +2441,7 @@
                 displayWordList();
                 updateStats();
                 updateWordsCounter();
-                showNotification(`تم إضافة ${newCards.length} كلمة جديدة بنجاح`);
+                showNotification(`تم إضافة ${newCards.length} تعبير جديد بنجاح`);
             } else {
                 showNotification('لم يتم العثور على بيانات صالحة في الملف', 'error');
             }
@@ -2311,7 +2451,7 @@
             const newCards = [];
 
             // تخطي السطر الأول إذا كان يحتوي على عناوين
-            const startIndex = (data[0][0] === 'word' || data[0][0] === 'كلمة') ? 1 : 0;
+            const startIndex = (data[0][0] === 'word' || data[0][0] === 'كلمة' || data[0][0] === 'تعبير') ? 1 : 0;
 
             for (let i = startIndex; i < data.length; i++) {
                 const row = data[i];
@@ -2342,7 +2482,7 @@
                 displayWordList();
                 updateStats();
                 updateWordsCounter();
-                showNotification(`تم إضافة ${newCards.length} كلمة جديدة بنجاح`);
+                showNotification(`تم إضافة ${newCards.length} تعبير جديد بنجاح`);
             } else {
                 showNotification('لم يتم العثور على بيانات صالحة في الملف', 'error');
             }
@@ -2354,7 +2494,7 @@
             container.innerHTML = '';
 
             if (filteredCards.length === 0) {
-                container.innerHTML = '<p class="no-cards">لا توجد كلمات للعرض. قم بإضافة كلمات أو رفع ملف CSV أو Excel.</p>';
+                container.innerHTML = '<p class="no-cards">لا توجد تعبيرات للعرض. قم بإضافة تعبيرات أو رفع ملف CSV أو Excel.</p>';
                 return;
             }
 
@@ -2380,20 +2520,20 @@
                 case 'strong':
                     frontColor = 'linear-gradient(135deg, #27ae60, #2ecc71)';
                     backColor = 'linear-gradient(135deg, #229954, #27ae60)';
-                    frontIcon = 'fas fa-star';
-                    backIcon = 'fas fa-check-circle';
+                    frontIcon = 'fas fa-trophy';
+                    backIcon = 'fas fa-crown';
                     break;
                 case 'medium':
                     frontColor = 'linear-gradient(135deg, #f39c12, #f1c40f)';
                     backColor = 'linear-gradient(135deg, #e67e22, #f39c12)';
-                    frontIcon = 'fas fa-star-half-alt';
-                    backIcon = 'fas fa-adjust';
+                    frontIcon = 'fas fa-medal';
+                    backIcon = 'fas fa-award';
                     break;
                 default: // weak
                     frontColor = 'linear-gradient(135deg, #e74c3c, #c0392b)';
                     backColor = 'linear-gradient(135deg, #c0392b, #a93226)';
-                    frontIcon = 'far fa-star';
-                    backIcon = 'fas fa-times-circle';
+                    frontIcon = 'fas fa-seedling';
+                    backIcon = 'fas fa-sprout';
             }
 
             flashcardElement.innerHTML = `
@@ -2414,14 +2554,14 @@
                 
                 <!-- أزرار تغيير مستوى الحفظ -->
                 <div class="storage-controls">
-                    <button class="storage-btn weak" onclick="changeStorageLevel(${card.id}, 'weak')" title="ضعيف">
-                        <i class="fas fa-times-circle"></i>
+                    <button class="storage-btn weak" onclick="changeStorageLevel(${card.id}, 'weak')" title="مبتدئ">
+                        <i class="fas fa-seedling"></i>
                     </button>
                     <button class="storage-btn medium" onclick="changeStorageLevel(${card.id}, 'medium')" title="متوسط">
-                        <i class="fas fa-adjust"></i>
+                        <i class="fas fa-medal"></i>
                     </button>
-                    <button class="storage-btn strong" onclick="changeStorageLevel(${card.id}, 'strong')" title="ممتاز">
-                        <i class="fas fa-check-circle"></i>
+                    <button class="storage-btn strong" onclick="changeStorageLevel(${card.id}, 'strong')" title="متقدم">
+                        <i class="fas fa-trophy"></i>
                     </button>
                 </div>
             `;
@@ -2531,7 +2671,7 @@
         // ===== وظائف الاختبار =====
         function startQuiz() {
             if (flashcards.length < 4) {
-                showNotification('يجب أن يكون هناك على الأقل 4 كلمات لبدء الاختبار', 'error');
+                showNotification('يجب أن يكون هناك على الأقل 4 تعبيرات لبدء الاختبار', 'error');
                 return;
             }
 
@@ -2732,7 +2872,7 @@
                     } else if (card.correctAnswers >= 5 && card.storageLevel === 'medium') {
                         card.storageLevel = 'strong';
                         card.mastered = true;
-                        showNotification(`تم ترقية "${card.word}" إلى مستوى ممتاز`, 'success');
+                        showNotification(`تم ترقية "${card.word}" إلى مستوى متقدم`, 'success');
                     }
                 }
 
@@ -2901,9 +3041,9 @@
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['ممتاز', 'متوسط', 'ضعيف'],
+                    labels: ['متقدم', 'متوسط', 'مبتدئ'],
                     datasets: [{
-                        label: 'عدد الكلمات',
+                        label: 'عدد التعبيرات',
                         data: [strongWords, mediumWords, weakWords],
                         backgroundColor: [
                             'rgba(46, 204, 113, 0.8)',
@@ -2924,7 +3064,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'توزيع الكلمات حسب مستوى الحفظ',
+                            text: 'توزيع التعبيرات حسب مستوى الحفظ',
                             font: {
                                 family: 'Cairo',
                                 size: 16,
@@ -2992,10 +3132,10 @@
         function exportData() {
             // إنشاء ورقة عمل للكلمات
             const wordsData = flashcards.map(card => ({
-                'الكلمة': card.word,
-                'الترجمة': card.translation,
+                'التعبير الإسباني': card.word,
+                'الترجمة العربية': card.translation,
                 'مستوى الحفظ': getStorageLevelText(card.storageLevel),
-                'ممتازة': card.mastered ? 'نعم' : 'لا',
+                'متقنة': card.mastered ? 'نعم' : 'لا',
                 'عدد المراجعات': card.reviewCount || 0,
                 'الإجابات الصحيحة': card.correctAnswers || 0,
                 'آخر مراجعة': card.lastReviewed ? new Date(card.lastReviewed).toLocaleDateString('ar-SA') : 'لم تتم المراجعة'
@@ -3003,8 +3143,8 @@
 
             // إنشاء ورقة عمل للإحصائيات
             const statsData = [
-                { 'المؤشر': 'إجمالي الكلمات', 'القيمة': studyStats.totalWords },
-                { 'المؤشر': 'الكلمات المحفوظة', 'القيمة': studyStats.masteredWords },
+                { 'المؤشر': 'إجمالي التعبيرات', 'القيمة': studyStats.totalWords },
+                { 'المؤشر': 'التعبيرات المتقنة', 'القيمة': studyStats.masteredWords },
                 { 'المؤشر': 'وقت الدراسة (دقيقة)', 'القيمة': studyStats.studyTime },
                 { 'المؤشر': 'نسبة الإتقان (%)', 'القيمة': studyStats.totalWords > 0 ? Math.round((studyStats.masteredWords / studyStats.totalWords) * 100) : 0 },
                 { 'المؤشر': 'التقدم اليومي', 'القيمة': studyStats.dailyProgress },
@@ -3016,7 +3156,7 @@
 
             // إضافة ورقة الكلمات
             const wordsWs = XLSX.utils.json_to_sheet(wordsData);
-            XLSX.utils.book_append_sheet(wb, wordsWs, "الكلمات");
+            XLSX.utils.book_append_sheet(wb, wordsWs, "التعبيرات");
 
             // إضافة ورقة الإحصائيات
             const statsWs = XLSX.utils.json_to_sheet(statsData);
@@ -3024,10 +3164,10 @@
 
             // تعديل عرض الأعمدة لتناسب المحتوى
             const wordsColWidths = [
-                { wch: 20 }, // الكلمة
-                { wch: 20 }, // الترجمة
+                { wch: 20 }, // التعبير الإسباني
+                { wch: 20 }, // الترجمة العربية
                 { wch: 15 }, // مستوى الحفظ
-                { wch: 10 }, // ممتازة
+                { wch: 10 }, // متقنة
                 { wch: 15 }, // عدد المراجعات
                 { wch: 15 }, // الإجابات الصحيحة
                 { wch: 20 }  // آخر مراجعة
