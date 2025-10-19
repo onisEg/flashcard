@@ -30,6 +30,7 @@
             --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
             --border-radius: 10px;
+            --font-size-base: 14px;
         }
 
         /* ===== الإعدادات الأساسية ===== */
@@ -45,8 +46,9 @@
             color: var(--text-color);
             direction: rtl;
             min-height: 100vh;
-            line-height: 1.6;
+            line-height: 1.5;
             font-weight: 400;
+            font-size: var(--font-size-base);
         }
 
         h1,
@@ -60,13 +62,16 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         /* ===== شريط التنقل ===== */
         .navbar {
             background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
             color: white;
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -79,19 +84,19 @@
         .nav-brand {
             display: flex;
             align-items: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .nav-brand i {
             margin-left: 0.5rem;
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
 
         .nav-menu {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
             flex-wrap: wrap;
         }
 
@@ -99,14 +104,14 @@
             background: none;
             border: none;
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.8rem;
             border-radius: var(--border-radius);
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
+            gap: 0.4rem;
+            font-size: 0.9rem;
             font-weight: 500;
         }
 
@@ -119,7 +124,7 @@
         /* ===== المحتوى الرئيسي ===== */
         .main-content {
             flex: 1;
-            padding: 2rem;
+            padding: 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
@@ -148,11 +153,11 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .section-header h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--dark-color);
             margin-bottom: 0.5rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -160,17 +165,32 @@
 
         .section-header p {
             color: #7f8c8d;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
+        }
+
+        .words-counter {
+            background: linear-gradient(135deg, var(--primary-color), #2980b9);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .words-counter i {
+            margin-left: 0.5rem;
         }
 
         /* ===== قسم الرفع ===== */
         .upload-section {
             background: white;
             border-radius: var(--border-radius);
-            padding: 2rem;
+            padding: 1.5rem;
             box-shadow: var(--card-shadow);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             transition: var(--transition);
             max-width: 500px;
             margin-left: auto;
@@ -185,10 +205,10 @@
             background: linear-gradient(135deg, var(--primary-color), #2980b9);
             color: white;
             border: none;
-            padding: 0.75rem 2rem;
+            padding: 0.6rem 1.5rem;
             border-radius: 30px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             margin: 0 auto;
             display: block;
@@ -204,7 +224,7 @@
         .upload-area {
             border: 2px dashed #bdc3c7;
             border-radius: var(--border-radius);
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
             transition: var(--transition);
             cursor: pointer;
@@ -224,7 +244,7 @@
         }
 
         .upload-area i {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--primary-color);
             margin-bottom: 0.5rem;
             animation: bounce 2s infinite;
@@ -253,7 +273,7 @@
             color: var(--dark-color);
             margin-bottom: 0.5rem;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .file-info {
@@ -262,12 +282,126 @@
             font-size: 0.8rem;
         }
 
+        /* ===== إدارة الكلمات ===== */
+        .word-management {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .word-management h3 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .add-word-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .add-word-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.6rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .add-word-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .word-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+        }
+
+        .word-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            border-bottom: 1px solid #f0f0f0;
+            transition: var(--transition);
+        }
+
+        .word-item:last-child {
+            border-bottom: none;
+        }
+
+        .word-item:hover {
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .word-content {
+            flex: 1;
+        }
+
+        .word-text {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .word-translation {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .word-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            background: none;
+            border: none;
+            padding: 0.4rem 0.6rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .edit-btn {
+            color: var(--primary-color);
+        }
+
+        .edit-btn:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .delete-btn {
+            color: var(--danger-color);
+        }
+
+        .delete-btn:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
         /* ===== عناصر التحكم ===== */
         .controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             flex-wrap: wrap;
             gap: 1rem;
             background: white;
@@ -288,14 +422,15 @@
             top: 50%;
             transform: translateY(-50%);
             color: #7f8c8d;
+            font-size: 1rem;
         }
 
         .search-box input {
             width: 100%;
-            padding: 0.75rem 2.5rem;
+            padding: 0.6rem 2.2rem;
             border: 2px solid #e0e0e0;
             border-radius: 30px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: var(--transition);
             background: #f8f9fa;
             font-weight: 500;
@@ -316,13 +451,13 @@
 
         .filter-options select,
         .filter-options button {
-            padding: 0.75rem 1rem;
+            padding: 0.6rem 1rem;
             border: 2px solid #e0e0e0;
             border-radius: var(--border-radius);
             background: white;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
         }
 
@@ -334,7 +469,7 @@
         .filter-options button {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
         }
 
@@ -348,13 +483,13 @@
         /* ===== شبكة الفلاش كاردز ===== */
         .flashcards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .flashcard {
-            height: 120px;
+            height: 100px;
             perspective: 1000px;
             cursor: pointer;
             position: relative;
@@ -384,7 +519,7 @@
             justify-content: center;
             border-radius: var(--border-radius);
             box-shadow: var(--card-shadow);
-            padding: 0.75rem;
+            padding: 0.8rem;
             text-align: center;
             transition: var(--transition);
         }
@@ -401,8 +536,8 @@
         }
 
         .flashcard h3 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
             font-weight: 600;
             word-break: break-word;
@@ -411,7 +546,7 @@
         .flashcard .category {
             font-size: 0.7rem;
             opacity: 0.9;
-            margin-top: 0.25rem;
+            margin-top: 0.3rem;
             background: rgba(255, 255, 255, 0.2);
             padding: 0.1rem 0.5rem;
             border-radius: 10px;
@@ -424,37 +559,11 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
-        /* زر الحذف */
-        .delete-btn {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background: var(--danger-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            transition: var(--transition);
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.7;
-            font-size: 0.7rem;
-        }
-
-        .delete-btn:hover {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-
         /* ===== قسم الاختبار ===== */
         .quiz-container {
             background: white;
             border-radius: var(--border-radius);
-            padding: 2rem;
+            padding: 1.5rem;
             box-shadow: var(--card-shadow);
             max-width: 800px;
             margin: 0 auto;
@@ -463,15 +572,16 @@
         .quiz-setup {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             border-radius: var(--border-radius);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             text-align: center;
         }
 
         .quiz-setup h3 {
             color: var(--dark-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: 600;
+            font-size: 1.1rem;
         }
 
         .quiz-setup-options {
@@ -485,6 +595,7 @@
         .quiz-setup-options label {
             font-weight: 500;
             color: #555;
+            font-size: 0.9rem;
         }
 
         .quiz-setup-options select {
@@ -494,12 +605,13 @@
             background: white;
             cursor: pointer;
             font-weight: 500;
+            font-size: 0.9rem;
         }
 
         .quiz-stats {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding: 1rem;
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             border-radius: var(--border-radius);
@@ -514,10 +626,11 @@
             color: #7f8c8d;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            font-size: 0.85rem;
         }
 
         .stat-item span:last-child {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -526,7 +639,7 @@
         .quiz-timer {
             text-align: center;
             margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--warning-color);
         }
@@ -534,9 +647,9 @@
         .quiz-card {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             border-radius: var(--border-radius);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            min-height: 300px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 250px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -544,9 +657,9 @@
         }
 
         .quiz-question {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: var(--dark-color);
             font-weight: 600;
         }
@@ -566,6 +679,7 @@
             cursor: pointer;
             transition: var(--transition);
             font-weight: 500;
+            font-size: 0.9rem;
             position: relative;
             overflow: hidden;
         }
@@ -646,11 +760,11 @@
         .primary-btn,
         .secondary-btn,
         .danger-btn {
-            padding: 0.75rem 2rem;
+            padding: 0.7rem 1.5rem;
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             transition: var(--transition);
             display: inline-flex;
@@ -698,7 +812,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .stat-card {
@@ -743,6 +857,7 @@
             color: #7f8c8d;
             margin-bottom: 0.5rem;
             font-weight: 600;
+            font-size: 1rem;
         }
 
         .stat-card span {
@@ -756,7 +871,7 @@
             border-radius: var(--border-radius);
             padding: 1.5rem;
             box-shadow: var(--card-shadow);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .progress-section h3 {
@@ -764,6 +879,7 @@
             margin-bottom: 1rem;
             text-align: center;
             font-weight: 600;
+            font-size: 1.1rem;
         }
 
         .progress-bar {
@@ -848,7 +964,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
         }
 
@@ -861,7 +977,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
-            padding: 0.75rem 0;
+            padding: 0.7rem 0;
             border-bottom: 1px solid #f0f0f0;
         }
 
@@ -873,6 +989,7 @@
         .setting-option label {
             color: #555;
             font-weight: 500;
+            font-size: 0.9rem;
         }
 
         /* ===== زر التبديل ===== */
@@ -938,7 +1055,7 @@
         .modal-content {
             background-color: white;
             margin: 10% auto;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: var(--border-radius);
             width: 80%;
             max-width: 500px;
@@ -987,8 +1104,8 @@
         }
 
         .result-details p {
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
+            margin-bottom: 0.7rem;
+            font-size: 1rem;
             color: #555;
             font-weight: 500;
         }
@@ -996,6 +1113,38 @@
         .result-details span {
             font-weight: 600;
             color: var(--dark-color);
+        }
+
+        /* ===== نافذة تعديل الكلمة ===== */
+        .edit-modal .modal-content {
+            max-width: 600px;
+        }
+
+        .edit-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .edit-form input {
+            padding: 0.8rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .edit-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .edit-form-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
         /* ===== التصميم المتجاوب ===== */
@@ -1015,7 +1164,7 @@
             }
 
             .section-header h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .controls {
@@ -1030,7 +1179,7 @@
 
             .flashcards-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-                gap: 0.5rem;
+                gap: 0.8rem;
             }
 
             .quiz-options {
@@ -1053,7 +1202,21 @@
 
             .quiz-setup-options {
                 flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .add-word-form {
+                flex-direction: column;
+            }
+
+            .word-item {
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 0.5rem;
+            }
+
+            .word-actions {
+                align-self: flex-end;
             }
         }
 
@@ -1079,7 +1242,8 @@
         body.dark-mode .setting-card,
         body.dark-mode .modal-content,
         body.dark-mode .controls,
-        body.dark-mode .quiz-setup {
+        body.dark-mode .quiz-setup,
+        body.dark-mode .word-management {
             background: var(--light-color);
             color: var(--text-color);
         }
@@ -1117,6 +1281,28 @@
             color: var(--text-color);
         }
 
+        body.dark-mode .words-counter {
+            background: linear-gradient(135deg, #2980b9, #34495e);
+        }
+
+        body.dark-mode .word-list {
+            border-color: #7f8c8d;
+        }
+
+        body.dark-mode .word-item {
+            border-bottom-color: #34495e;
+        }
+
+        body.dark-mode .word-item:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        body.dark-mode .add-word-form input {
+            background: #34495e;
+            color: var(--text-color);
+            border-color: #7f8c8d;
+        }
+
         /* ===== الإشعارات ===== */
         .notification {
             position: fixed;
@@ -1125,12 +1311,13 @@
             transform: translateX(-50%);
             background: var(--secondary-color);
             color: white;
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             border-radius: var(--border-radius);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             animation: slideDown 0.3s ease, fadeOut 0.3s ease 2.7s;
             font-weight: 500;
+            font-size: 0.95rem;
         }
 
         .notification.error {
@@ -1140,7 +1327,7 @@
         .no-cards {
             text-align: center;
             color: #7f8c8d;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-top: 2rem;
             padding: 2rem;
             font-weight: 500;
@@ -1202,7 +1389,8 @@
             .navbar,
             .controls,
             .upload-section,
-            .delete-btn {
+            .words-counter,
+            .word-management {
                 display: none;
             }
 
@@ -1253,6 +1441,27 @@
                 <div class="section-header">
                     <h1>مكتبة flashcard</h1>
                     <p>ارفع ملف CSV أو Excel لبدء التعلم</p>
+                </div>
+
+                <div style="text-align: center;">
+                    <div class="words-counter" id="wordsCounter">
+                        <i class="fas fa-layer-group"></i>
+                        <span id="totalWordsCount">0</span> كلمة
+                    </div>
+                </div>
+
+                <!-- قسم إدارة الكلمات -->
+                <div class="word-management">
+                    <h3><i class="fas fa-edit"></i> إدارة الكلمات</h3>
+                    <div class="add-word-form">
+                        <input type="text" id="newWord" placeholder="الكلمة">
+                        <input type="text" id="newTranslation" placeholder="الترجمة">
+                        <input type="text" id="newCategory" placeholder="الفئة (اختياري)">
+                        <button class="primary-btn" onclick="addWord()">
+                            <i class="fas fa-plus"></i> إضافة كلمة
+                        </button>
+                    </div>
+                    <div class="word-list" id="wordList"></div>
                 </div>
 
                 <div class="upload-section">
@@ -1356,6 +1565,7 @@
                         <div class="quiz-controls">
                             <button id="nextQuestionBtn" class="primary-btn hidden">السؤال التالي</button>
                             <button id="finishQuizBtn" class="secondary-btn hidden">إنهاء الاختبار</button>
+                            <button id="cancelQuizBtn" class="danger-btn">إلغاء الاختبار</button>
                         </div>
                     </div>
                 </div>
@@ -1488,6 +1698,23 @@
         </div>
     </div>
 
+    <!-- نافذة تعديل الكلمة -->
+    <div id="editModal" class="modal edit-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>تعديل الكلمة</h2>
+            <div class="edit-form">
+                <input type="text" id="editWord" placeholder="الكلمة">
+                <input type="text" id="editTranslation" placeholder="الترجمة">
+                <input type="text" id="editCategory" placeholder="الفئة">
+                <div class="edit-form-buttons">
+                    <button class="primary-btn" onclick="saveEditWord()">حفظ</button>
+                    <button class="secondary-btn" onclick="closeEditModal()">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ===== المتغيرات العامة =====
         let flashcards = [];
@@ -1503,6 +1730,26 @@
         let quizTimer = null;
         let timeRemaining = 5;
         let answerSelected = false;
+        let editingCardId = null;
+
+        // ===== الكلمات الافتراضية =====
+        const defaultWords = [
+            { word: "Hello", translation: "مرحبا", category: "تحيات" },
+            { word: "Goodbye", translation: "وداعا", category: "تحيات" },
+            { word: "Thank you", translation: "شكرا", category: "تحيات" },
+            { word: "Please", translation: "من فضلك", category: "تحيات" },
+            { word: "Sorry", translation: "آسف", category: "تحيات" },
+            { word: "Yes", translation: "نعم", category: "أساسية" },
+            { word: "No", translation: "لا", category: "أساسية" },
+            { word: "Water", translation: "ماء", category: "طبيعة" },
+            { word: "Food", translation: "طعام", category: "طبيعة" },
+            { word: "House", translation: "منزل", category: "مكان" },
+            { word: "Car", translation: "سيارة", category: "مركبة" },
+            { word: "Book", translation: "كتاب", category: "أشياء" },
+            { word: "Friend", translation: "صديق", category: "علاقات" },
+            { word: "Family", translation: "عائلة", category: "علاقات" },
+            { word: "Love", translation: "حب", category: "علاقات" }
+        ];
 
         // ===== تهيئة التطبيق =====
         document.addEventListener('DOMContentLoaded', () => {
@@ -1510,6 +1757,8 @@
             loadSavedData();
             setupEventListeners();
             updateStats();
+            updateWordsCounter();
+            displayWordList();
         });
 
         // ===== وظائف التهيئة =====
@@ -1538,12 +1787,20 @@
         function loadSavedData() {
             const savedCards = localStorage.getItem('flashcards');
             const savedStats = localStorage.getItem('studyStats');
+            const isFirstVisit = localStorage.getItem('isFirstVisit');
 
-            if (savedCards) {
+            // إذا كانت هذه هي الزيارة الأولى، قم بإضافة الكلمات الافتراضية
+            if (!isFirstVisit && !savedCards) {
+                flashcards = [...defaultWords];
+                localStorage.setItem('flashcards', JSON.stringify(flashcards));
+                localStorage.setItem('isFirstVisit', 'true');
+                showNotification('تمت إضافة كلمات افتراضية للمساعدة في البدء');
+            } else if (savedCards) {
                 flashcards = JSON.parse(savedCards);
-                filteredCards = [...flashcards];
-                displayFlashcards();
             }
+
+            filteredCards = [...flashcards];
+            displayFlashcards();
 
             if (savedStats) {
                 studyStats = JSON.parse(savedStats);
@@ -1606,6 +1863,7 @@
             document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
             document.getElementById('nextQuestionBtn').addEventListener('click', nextQuestion);
             document.getElementById('finishQuizBtn').addEventListener('click', finishQuiz);
+            document.getElementById('cancelQuizBtn').addEventListener('click', cancelQuiz);
 
             // الإعدادات
             document.getElementById('darkModeToggle').addEventListener('change', toggleDarkMode);
@@ -1614,9 +1872,14 @@
             document.getElementById('exportDataBtn').addEventListener('click', exportData);
             document.getElementById('clearDataBtn').addEventListener('click', clearData);
 
-            // النافذة المنبثقة
+            // النوافذ المنبثقة
             document.querySelector('.close').addEventListener('click', closeModal);
             document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+
+            // النافذة المنبثقة للتعديل
+            document.querySelectorAll('#editModal .close').forEach(closeBtn => {
+                closeBtn.addEventListener('click', closeEditModal);
+            });
 
             // بدء تتبع وقت الدراسة
             studyStartTime = Date.now();
@@ -1634,6 +1897,141 @@
             // تحديث الرسم البياني عند عرض الإحصائيات
             if (sectionName === 'stats') {
                 updateChart();
+            }
+        }
+
+        // ===== وظيفة تحديث عداد الكلمات =====
+        function updateWordsCounter() {
+            document.getElementById('totalWordsCount').textContent = filteredCards.length;
+        }
+
+        // ===== وظائف إدارة الكلمات =====
+        function addWord() {
+            const word = document.getElementById('newWord').value.trim();
+            const translation = document.getElementById('newTranslation').value.trim();
+            const category = document.getElementById('newCategory').value.trim();
+
+            if (!word || !translation) {
+                showNotification('يرجى إدخال الكلمة والترجمة', 'error');
+                return;
+            }
+
+            const newCard = {
+                id: Date.now(),
+                word,
+                translation,
+                category: category || '',
+                mastered: false,
+                lastReviewed: null
+            };
+
+            flashcards.push(newCard);
+            filteredCards = [...flashcards];
+
+            // مسح الحقول
+            document.getElementById('newWord').value = '';
+            document.getElementById('newTranslation').value = '';
+            document.getElementById('newCategory').value = '';
+
+            saveData();
+            displayFlashcards();
+            displayWordList();
+            updateStats();
+            updateWordsCounter();
+            showNotification('تمت إضافة الكلمة بنجاح');
+        }
+
+        function displayWordList() {
+            const wordList = document.getElementById('wordList');
+            wordList.innerHTML = '';
+
+            if (flashcards.length === 0) {
+                wordList.innerHTML = '<p style="text-align: center; color: #7f8c8d; padding: 1rem;">لا توجد كلمات مضافة بعد</p>';
+                return;
+            }
+
+            flashcards.forEach(card => {
+                const wordItem = document.createElement('div');
+                wordItem.className = 'word-item';
+                wordItem.innerHTML = `
+                    <div class="word-content">
+                        <div class="word-text">${card.word}</div>
+                        <div class="word-translation">${card.translation}</div>
+                        ${card.category ? `<small style="color: #7f8c8d;">${card.category}</small>` : ''}
+                    </div>
+                    <div class="word-actions">
+                        <button class="edit-btn" onclick="editWord(${card.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="delete-btn" onclick="deleteWord(${card.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                wordList.appendChild(wordItem);
+            });
+        }
+
+        function editWord(cardId) {
+            const card = flashcards.find(c => c.id === cardId);
+            if (!card) return;
+
+            editingCardId = cardId;
+            document.getElementById('editWord').value = card.word;
+            document.getElementById('editTranslation').value = card.translation;
+            document.getElementById('editCategory').value = card.category || '';
+
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        function saveEditWord() {
+            if (!editingCardId) return;
+
+            const word = document.getElementById('editWord').value.trim();
+            const translation = document.getElementById('editTranslation').value.trim();
+            const category = document.getElementById('editCategory').value.trim();
+
+            if (!word || !translation) {
+                showNotification('يرجى إدخال الكلمة والترجمة', 'error');
+                return;
+            }
+
+            const cardIndex = flashcards.findIndex(c => c.id === editingCardId);
+            if (cardIndex !== -1) {
+                flashcards[cardIndex] = {
+                    ...flashcards[cardIndex],
+                    word,
+                    translation,
+                    category
+                };
+
+                filteredCards = [...flashcards];
+                saveData();
+                displayFlashcards();
+                displayWordList();
+                updateStats();
+                showNotification('تم تعديل الكلمة بنجاح');
+            }
+
+            closeEditModal();
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            editingCardId = null;
+        }
+
+        function deleteWord(cardId) {
+            if (confirm('هل أنت متأكد من حذف هذه الكلمة؟')) {
+                flashcards = flashcards.filter(card => card.id !== cardId);
+                filteredCards = [...flashcards];
+
+                saveData();
+                displayFlashcards();
+                displayWordList();
+                updateStats();
+                updateWordsCounter();
+                showNotification('تم حذف الكلمة بنجاح');
             }
         }
 
@@ -1680,7 +2078,7 @@
                     if (parts.length >= 2) {
                         const word = parts[0].trim();
                         const translation = parts[1].trim();
-                        const category = parts[2] ? parts[2].trim() : 'عام';
+                        const category = parts[2] ? parts[2].trim() : '';
 
                         if (word && translation) {
                             newCards.push({
@@ -1701,7 +2099,9 @@
                 filteredCards = [...flashcards];
                 saveData();
                 displayFlashcards();
+                displayWordList();
                 updateStats();
+                updateWordsCounter();
                 showNotification(`تم إضافة ${newCards.length} كلمة جديدة بنجاح`);
             } else {
                 showNotification('لم يتم العثور على بيانات صالحة في الملف', 'error');
@@ -1719,7 +2119,7 @@
                 if (row && row.length >= 2) {
                     const word = String(row[0]).trim();
                     const translation = String(row[1]).trim();
-                    const category = row[2] ? String(row[2]).trim() : 'عام';
+                    const category = row[2] ? String(row[2]).trim() : '';
 
                     if (word && translation) {
                         newCards.push({
@@ -1739,7 +2139,9 @@
                 filteredCards = [...flashcards];
                 saveData();
                 displayFlashcards();
+                displayWordList();
                 updateStats();
+                updateWordsCounter();
                 showNotification(`تم إضافة ${newCards.length} كلمة جديدة بنجاح`);
             } else {
                 showNotification('لم يتم العثور على بيانات صالحة في الملف', 'error');
@@ -1752,7 +2154,7 @@
             container.innerHTML = '';
 
             if (filteredCards.length === 0) {
-                container.innerHTML = '<p class="no-cards">لا توجد كلمات للعرض. قم برفع ملف CSV أو Excel.</p>';
+                container.innerHTML = '<p class="no-cards">لا توجد كلمات للعرض. قم بإضافة كلمات أو رفع ملف CSV أو Excel.</p>';
                 return;
             }
 
@@ -1770,27 +2172,21 @@
             flashcardElement.dataset.id = card.id;
 
             flashcardElement.innerHTML = `
-                <button class="delete-btn" onclick="deleteCard(${card.id})">
-                    <i class="fas fa-trash"></i>
-                </button>
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
                         <h3>${card.word}</h3>
-                        <span class="category">${card.category}</span>
+                        ${card.category ? `<span class="category">${card.category}</span>` : ''}
                     </div>
                     <div class="flashcard-back">
                         <h3>${card.translation}</h3>
-                        <span class="category">${card.category}</span>
+                        ${card.category ? `<span class="category">${card.category}</span>` : ''}
                     </div>
                 </div>
             `;
 
             flashcardElement.addEventListener('click', (e) => {
-                // لا تقلب الكارت إذا تم النقر على زر الحذف
-                if (!e.target.closest('.delete-btn')) {
-                    flipCard(flashcardElement);
-                    markAsReviewed(card);
-                }
+                flipCard(flashcardElement);
+                markAsReviewed(card);
             });
 
             return flashcardElement;
@@ -1815,22 +2211,9 @@
             updateStats();
         }
 
-        // ===== وظيفة حذف الكلمة =====
-        function deleteCard(cardId) {
-            if (confirm('هل أنت متأكد من حذف هذه الكلمة؟')) {
-                flashcards = flashcards.filter(card => card.id !== cardId);
-                filteredCards = filteredCards.filter(card => card.id !== cardId);
-
-                saveData();
-                displayFlashcards();
-                updateStats();
-                showNotification('تم حذف الكلمة بنجاح');
-            }
-        }
-
         // ===== وظائف الفلترة والبحث =====
         function updateCategoryFilter() {
-            const categories = [...new Set(flashcards.map(card => card.category))];
+            const categories = [...new Set(flashcards.map(card => card.category).filter(cat => cat))];
             const filter = document.getElementById('categoryFilter');
 
             // حفظ القيمة المحددة حالياً
@@ -1863,6 +2246,7 @@
             });
 
             displayFlashcards();
+            updateWordsCounter();
         }
 
         function shuffleCards() {
@@ -1876,6 +2260,7 @@
             document.getElementById('searchInput').value = '';
             document.getElementById('categoryFilter').value = 'all';
             displayFlashcards();
+            updateWordsCounter();
             showNotification('تم إعادة تعيين العرض');
         }
 
@@ -2146,6 +2531,30 @@
             updateStats();
         }
 
+        function cancelQuiz() {
+            if (!currentQuiz) return;
+
+            // إيقاف المؤقت
+            if (quizTimer) {
+                clearInterval(quizTimer);
+            }
+
+            // إعادة تعيين واجهة الاختبار
+            document.getElementById('quizSetup').classList.remove('hidden');
+            document.getElementById('quizInterface').classList.add('hidden');
+
+            // مسح بيانات الاختبار
+            currentQuiz = null;
+
+            // إعادة تعيين عرض النتيجة
+            document.getElementById('quizScore').textContent = '0';
+            document.getElementById('currentQuestion').textContent = '1/10';
+            document.getElementById('timeRemaining').textContent = '5';
+            document.getElementById('quizTimerDisplay').innerHTML = '';
+
+            showNotification('تم إلغاء الاختبار');
+        }
+
         function closeModal() {
             document.getElementById('resultModal').style.display = 'none';
         }
@@ -2224,6 +2633,14 @@
                                 size: 16,
                                 weight: 'bold'
                             }
+                        },
+                        legend: {
+                            labels: {
+                                font: {
+                                    family: 'Cairo',
+                                    size: 14
+                                }
+                            }
                         }
                     },
                     scales: {
@@ -2231,14 +2648,16 @@
                             beginAtZero: true,
                             ticks: {
                                 font: {
-                                    family: 'Cairo'
+                                    family: 'Cairo',
+                                    size: 14
                                 }
                             }
                         },
                         x: {
                             ticks: {
                                 font: {
-                                    family: 'Cairo'
+                                    family: 'Cairo',
+                                    size: 14
                                 }
                             }
                         }
@@ -2307,7 +2726,9 @@
                 };
 
                 displayFlashcards();
+                displayWordList();
                 updateStatsDisplay();
+                updateWordsCounter();
                 showNotification('تم مسح جميع البيانات');
             }
         }
