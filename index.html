@@ -1407,6 +1407,36 @@
                 display: none;
             }
         }
+
+        /* ===== تحسينات للموبايل ===== */
+        @media (max-width: 768px) {
+
+            /* تحسين تجربة اللمس على الكروت */
+            .flashcard {
+                height: 120px;
+            }
+
+            .flashcard-inner {
+                transition: transform 0.4s ease;
+            }
+
+            /* زيادة مساحة النقر على الكروت */
+            .flashcard-front,
+            .flashcard-back {
+                padding: 1rem;
+            }
+
+            /* تحسين حجم الخط على الموبايل */
+            .flashcard h3 {
+                font-size: 1rem;
+            }
+
+            /* تحسين عرض الفئات */
+            .flashcard .category {
+                font-size: 0.75rem;
+                padding: 0.15rem 0.6rem;
+            }
+        }
     </style>
 </head>
 
@@ -1440,42 +1470,13 @@
             <section id="home" class="content-section active">
                 <div class="section-header">
                     <h1>مكتبة flashcard</h1>
-                    <p>ارفع ملف CSV أو Excel لبدء التعلم</p>
+                    <p>تعلم الكلمات الجديدة بسهولة وفعالية</p>
                 </div>
 
                 <div style="text-align: center;">
                     <div class="words-counter" id="wordsCounter">
                         <i class="fas fa-layer-group"></i>
                         <span id="totalWordsCount">0</span> كلمة
-                    </div>
-                </div>
-
-                <!-- قسم إدارة الكلمات -->
-                <div class="word-management">
-                    <h3><i class="fas fa-edit"></i> إدارة الكلمات</h3>
-                    <div class="add-word-form">
-                        <input type="text" id="newWord" placeholder="الكلمة">
-                        <input type="text" id="newTranslation" placeholder="الترجمة">
-                        <input type="text" id="newCategory" placeholder="الفئة (اختياري)">
-                        <button class="primary-btn" onclick="addWord()">
-                            <i class="fas fa-plus"></i> إضافة كلمة
-                        </button>
-                    </div>
-                    <div class="word-list" id="wordList"></div>
-                </div>
-
-                <div class="upload-section">
-                    <button class="upload-btn" id="uploadBtn">
-                        <i class="fas fa-upload"></i> رفع ملف
-                    </button>
-                    <div class="upload-area" id="uploadArea">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <h3>اسحب وأفلت الملف هنا أو</h3>
-                        <input type="file" id="csvFile" accept=".csv,.xlsx,.xls">
-                        <button class="upload-btn" onclick="document.getElementById('csvFile').click()">
-                            اختر ملف
-                        </button>
-                        <p class="file-info">يدعم ملفات CSV و Excel (صيغة: كلمة,ترجمة)</p>
                     </div>
                 </div>
 
@@ -1619,6 +1620,35 @@
                 <div class="section-header">
                     <h1>الإعدادات</h1>
                     <p>تخصيص تجربة التعلم الخاصة بك</p>
+                </div>
+
+                <!-- قسم إدارة الكلمات -->
+                <div class="word-management">
+                    <h3><i class="fas fa-edit"></i> إدارة الكلمات</h3>
+                    <div class="add-word-form">
+                        <input type="text" id="newWord" placeholder="الكلمة">
+                        <input type="text" id="newTranslation" placeholder="الترجمة">
+                        <input type="text" id="newCategory" placeholder="الفئة (اختياري)">
+                        <button class="primary-btn" onclick="addWord()">
+                            <i class="fas fa-plus"></i> إضافة كلمة
+                        </button>
+                    </div>
+                    <div class="word-list" id="wordList"></div>
+                </div>
+
+                <div class="upload-section">
+                    <button class="upload-btn" id="uploadBtn">
+                        <i class="fas fa-upload"></i> رفع ملف
+                    </button>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>اسحب وأفلت الملف هنا أو</h3>
+                        <input type="file" id="csvFile" accept=".csv,.xlsx,.xls">
+                        <button class="upload-btn" onclick="document.getElementById('csvFile').click()">
+                            اختر ملف
+                        </button>
+                        <p class="file-info">يدعم ملفات CSV و Excel (صيغة: كلمة,ترجمة)</p>
+                    </div>
                 </div>
 
                 <div class="settings-grid">
@@ -2184,7 +2214,21 @@
                 </div>
             `;
 
+            // استخدام أحداث اللمس للموبايل وأحداث النقر للكمبيوتر
             flashcardElement.addEventListener('click', (e) => {
+                e.preventDefault();
+                flipCard(flashcardElement);
+                markAsReviewed(card);
+            });
+
+            // إضافة دعم لللمس على الموبايل
+            flashcardElement.addEventListener('touchstart', (e) => {
+                // منع السلوك الافتراضي للتمرير
+                e.preventDefault();
+            });
+
+            flashcardElement.addEventListener('touchend', (e) => {
+                e.preventDefault();
                 flipCard(flashcardElement);
                 markAsReviewed(card);
             });
