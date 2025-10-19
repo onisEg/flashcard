@@ -1276,6 +1276,30 @@
             .word-actions {
                 align-self: flex-end;
             }
+
+            /* ===== تحسينات أزرار التقييم للموبايل ===== */
+            .storage-controls {
+                opacity: 1 !important;
+                /* إجبار الأزرار على الظهور */
+                bottom: -38px;
+                gap: 8px;
+            }
+
+            .flashcard {
+                margin-bottom: 55px;
+                /* زيادة المسافة أسفل الكرت */
+            }
+
+            .storage-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+
+            .storage-btn:active {
+                transform: scale(0.95);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
         }
 
         /* ===== الوضع الليلي ===== */
@@ -1472,7 +1496,6 @@
             /* تحسين تجربة اللمس على الكروت */
             .flashcard {
                 height: 130px;
-                margin-bottom: 50px;
             }
 
             .flashcard-inner {
@@ -1489,23 +1512,6 @@
             .flashcard h3 {
                 font-size: 1rem;
             }
-
-            /* تحسين أزرار التحكم في مستوى الحفظ */
-            .storage-controls {
-                bottom: -40px;
-                gap: 8px;
-            }
-
-            .storage-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 0.9rem;
-            }
-
-            .storage-indicator {
-                font-size: 0.8rem;
-                padding: 3px 8px;
-            }
         }
 
         /* ===== تحسينات للشاشات الصغيرة جداً ===== */
@@ -1517,7 +1523,7 @@
 
             .flashcard {
                 height: 120px;
-                margin-bottom: 45px;
+                margin-bottom: 50px;
             }
 
             .flashcard h3 {
@@ -1525,14 +1531,21 @@
             }
 
             .storage-controls {
-                bottom: -30px;
-                gap: 4px;
+                opacity: 1 !important;
+                /* إجبار الأزرار على الظهور */
+                bottom: -35px;
+                gap: 6px;
             }
 
             .storage-btn {
-                width: 24px;
-                height: 24px;
-                font-size: 0.7rem;
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+            }
+
+            .storage-btn:active {
+                transform: scale(0.95);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             }
         }
     </style>
@@ -2379,7 +2392,7 @@
                 default: // weak
                     frontColor = 'linear-gradient(135deg, #e74c3c, #c0392b)';
                     backColor = 'linear-gradient(135deg, #c0392b, #a93226)';
-                    frontIcon = 'fa-regular fa-star'; // تصحيح هنا
+                    frontIcon = 'far fa-star';
                     backIcon = 'fas fa-times-circle';
             }
 
