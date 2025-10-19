@@ -1821,6 +1821,11 @@
                         <button class="danger-btn" id="clearDataBtn">
                             <i class="fas fa-trash"></i> مسح البيانات
                         </button>
+                        <div style="margin-top: 1rem;">
+                            <button class="primary-btn" id="resetToDefaultBtn">
+                                <i class="fas fa-sync-alt"></i> استعادة التعبيرات الافتراضية
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1873,6 +1878,9 @@
         let timeRemaining = 5;
         let answerSelected = false;
         let editingCardId = null;
+
+        // ===== إصدار التطبيق =====
+        const APP_VERSION = '2.0'; // قم بتغيير هذا الرقم عند تحديث التعبيرات الافتراضية
 
         // ===== الكلمات الافتراضية - تعبيرات إسبانية-عربية =====
         const defaultWords = [
@@ -2060,21 +2068,41 @@
 
         function loadSavedData() {
             try {
+                const savedVersion = localStorage.getItem('appVersion');
                 const savedCards = localStorage.getItem('flashcards');
                 const savedStats = localStorage.getItem('studyStats');
                 const savedSettings = localStorage.getItem('flashcardSettings');
-                const isFirstVisit = localStorage.getItem('isFirstVisit');
 
-                if (savedCards) {
-                    flashcards = JSON.parse(savedCards);
-                } else if (!isFirstVisit) {
+                // التحقق من وجود تحديث للتطبيق
+                if (savedVersion !== APP_VERSION) {
+                    // تم تحديث التطبيق، قم بإعادة تعيين البيانات
+                    console.log('تم تحديث التطبيق، جاري تحميل التعبيرات الجديدة...');
                     flashcards = [...defaultWords];
+                    studyStats = {
+                        totalWords: 0,
+                        masteredWords: 0,
+                        studyTime: 0,
+                        dailyProgress: 0
+                    };
+
+                    // حفظ الإصدار الجديد والبيانات
+                    localStorage.setItem('appVersion', APP_VERSION);
                     localStorage.setItem('flashcards', JSON.stringify(flashcards));
-                    localStorage.setItem('isFirstVisit', 'true');
+                    localStorage.setItem('studyStats', JSON.stringify(studyStats));
+
+                    showNotification('تم تحديث التطبيق وتحميل التعبيرات الإسبانية الجديدة');
+                } else if (savedCards) {
+                    // لا يوجد تحديث، قم بتحميل البيانات المحفوظة
+                    flashcards = JSON.parse(savedCards);
+                } else {
+                    // أول استخدام للتطبيق
+                    flashcards = [...defaultWords];
+                    localStorage.setItem('appVersion', APP_VERSION);
+                    localStorage.setItem('flashcards', JSON.stringify(flashcards));
                     showNotification('تمت إضافة تعبيرات افتراضية للمساعدة في البدء');
                 }
 
-                if (savedStats) {
+                if (savedStats && savedVersion === APP_VERSION) {
                     studyStats = JSON.parse(savedStats);
                 }
 
@@ -2171,6 +2199,9 @@
             document.getElementById('dailyWordsGoal').addEventListener('change', updateDailyGoal);
             document.getElementById('exportDataBtn').addEventListener('click', exportData);
             document.getElementById('clearDataBtn').addEventListener('click', clearData);
+
+            // زر استعادة التعبيرات الافتراضية
+            document.getElementById('resetToDefaultBtn').addEventListener('click', resetToDefault);
 
             // النوافذ المنبثقة
             document.querySelector('.close').addEventListener('click', closeModal);
@@ -2370,6 +2401,24 @@
                 updateStats();
                 updateWordsCounter();
                 showNotification('تم حذف التعبير بنجاح');
+            }
+        }
+
+        // ===== وظيفة استعادة التعبيرات الافتراضية =====
+        function resetToDefault() {
+            if (confirm('هل أنت متأكد من استعادة التعبيرات الافتراضية؟ سيتم فقدان جميع التعبيرات المضافة يدوياً.')) {
+                flashcards = [...defaultWords];
+                filteredCards = [...flashcards];
+
+                // تحديث الإصدار لمنع التحديث التلقائي مرة أخرى
+                localStorage.setItem('appVersion', APP_VERSION);
+
+                saveData();
+                displayFlashcards();
+                displayWordList();
+                updateStats();
+                updateWordsCounter();
+                showNotification('تم استعادة التعبيرات الافتراضية بنجاح');
             }
         }
 
