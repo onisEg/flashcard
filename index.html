@@ -1599,15 +1599,15 @@
                     <div class="filter-options">
                         <select id="storageLevelFilter">
                             <option value="all">كل المستويات</option>
-                            <option value="weak">مبتدئ</option>
-                            <option value="medium">متوسط</option>
-                            <option value="strong">متقدم</option>
+                            <option value="weak">مستوى 1</option>
+                            <option value="medium">مستوى 2</option>
+                            <option value="strong">مستوى 3</option>
                         </select>
                         <button id="shuffleBtn">
                             <i class="fas fa-random"></i> عشوائي
                         </button>
                         <button id="resetBtn">
-                            <i class="fas fa-redo"></i> إعادة
+                            <i class="fas fa-sync-alt"></i> تحديث
                         </button>
                     </div>
                 </div>
@@ -1701,17 +1701,17 @@
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-star"></i>
-                        <h3>تعبيرات متقدمة</h3>
+                        <h3>تعبيرات مستوى 3</h3>
                         <span id="strongWords">0</span>
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-star-half-alt"></i>
-                        <h3>تعبيرات متوسطة</h3>
+                        <h3>تعبيرات مستوى 2</h3>
                         <span id="mediumWords">0</span>
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-times-circle"></i>
-                        <h3>تعبيرات مبتدئة</h3>
+                        <h3>تعبيرات مستوى 1</h3>
                         <span id="weakWords">0</span>
                     </div>
                 </div>
@@ -1880,7 +1880,7 @@
         let editingCardId = null;
 
         // ===== إصدار التطبيق =====
-        const APP_VERSION = '2.0'; // قم بتغيير هذا الرقم عند تحديث التعبيرات الافتراضية
+        const APP_VERSION = '2.1'; // قم بتغيير هذا الرقم عند تحديث التعبيرات الافتراضية
 
         // ===== الكلمات الافتراضية - تعبيرات إسبانية-عربية =====
         const defaultWords = [
@@ -2072,6 +2072,7 @@
                 const savedCards = localStorage.getItem('flashcards');
                 const savedStats = localStorage.getItem('studyStats');
                 const savedSettings = localStorage.getItem('flashcardSettings');
+                const lastUpdate = localStorage.getItem('lastUpdate');
 
                 // التحقق من وجود تحديث للتطبيق
                 if (savedVersion !== APP_VERSION) {
@@ -2089,16 +2090,21 @@
                     localStorage.setItem('appVersion', APP_VERSION);
                     localStorage.setItem('flashcards', JSON.stringify(flashcards));
                     localStorage.setItem('studyStats', JSON.stringify(studyStats));
+                    localStorage.setItem('lastUpdate', new Date().toISOString());
 
                     showNotification('تم تحديث التطبيق وتحميل التعبيرات الإسبانية الجديدة');
                 } else if (savedCards) {
                     // لا يوجد تحديث، قم بتحميل البيانات المحفوظة
                     flashcards = JSON.parse(savedCards);
+
+                    // التحقق من الحاجة للتحديث التلقائي للكلمات المرفوعة
+                    checkAndUpdateUploadedWords();
                 } else {
                     // أول استخدام للتطبيق
                     flashcards = [...defaultWords];
                     localStorage.setItem('appVersion', APP_VERSION);
                     localStorage.setItem('flashcards', JSON.stringify(flashcards));
+                    localStorage.setItem('lastUpdate', new Date().toISOString());
                     showNotification('تمت إضافة تعبيرات افتراضية للمساعدة في البدء');
                 }
 
@@ -2118,6 +2124,45 @@
                 console.error('Error loading data:', e);
                 showNotification('حدث خطأ أثناء تحميل البيانات', 'error');
             }
+        }
+
+        // ===== وظيفة التحقق والتحديث التلقائي للكلمات المرفوعة =====
+        function checkAndUpdateUploadedWords() {
+            const lastUpdate = localStorage.getItem('lastUpdate');
+            const now = new Date();
+            const lastUpdateDate = lastUpdate ? new Date(lastUpdate) : null;
+
+            // إذا لم يكن هناك تاريخ تحديث أو مر أكثر من يوم منذ آخر تحديث
+            if (!lastUpdateDate || (now - lastUpdateDate) > (24 * 60 * 60 * 1000)) {
+                // دمج الكلمات المرفوعة مع الكلمات الافتراضية
+                const mergedWords = mergeWordsWithDefaults(flashcards);
+
+                if (mergedWords.length > flashcards.length) {
+                    flashcards = mergedWords;
+                    localStorage.setItem('flashcards', JSON.stringify(flashcards));
+                    localStorage.setItem('lastUpdate', now.toISOString());
+
+                    showNotification(`تم تحديث التعبيرات تلقائياً. إجمالي التعبيرات: ${mergedWords.length}`);
+                }
+            }
+        }
+
+        // ===== وظيفة دمج الكلمات المرفوعة مع الكلمات الافتراضية =====
+        function mergeWordsWithDefaults(currentWords) {
+            const merged = [...currentWords];
+            const defaultWordsSet = new Set(defaultWords.map(w => w.word.toLowerCase()));
+
+            // إضافة الكلمات الافتراضية التي ليست موجودة
+            defaultWords.forEach(defaultWord => {
+                if (!defaultWordsSet.has(defaultWord.word.toLowerCase())) {
+                    merged.push({
+                        ...defaultWord,
+                        id: Date.now() + Math.random() // إنشاء ID فريد
+                    });
+                }
+            });
+
+            return merged;
         }
 
         function applySettings(settings) {
@@ -2338,9 +2383,9 @@
 
         function getStorageLevelText(level) {
             switch (level) {
-                case 'strong': return 'متقدم';
-                case 'medium': return 'متوسط';
-                default: return 'مبتدئ';
+                case 'strong': return 'مستوى 3';
+                case 'medium': return 'مستوى 2';
+                default: return 'مستوى 1';
             }
         }
 
@@ -2412,6 +2457,7 @@
 
                 // تحديث الإصدار لمنع التحديث التلقائي مرة أخرى
                 localStorage.setItem('appVersion', APP_VERSION);
+                localStorage.setItem('lastUpdate', new Date().toISOString());
 
                 saveData();
                 displayFlashcards();
@@ -2483,8 +2529,14 @@
             }
 
             if (newCards.length > 0) {
-                flashcards = [...flashcards, ...newCards];
+                // دمج الكلمات المرفوعة مع الكلمات الحالية
+                const mergedWords = mergeWordsWithDefaults([...flashcards, ...newCards]);
+                flashcards = mergedWords;
                 filteredCards = [...flashcards];
+
+                // تحديث تاريخ آخر تحديث
+                localStorage.setItem('lastUpdate', new Date().toISOString());
+
                 saveData();
                 displayFlashcards();
                 displayWordList();
@@ -2524,8 +2576,14 @@
             }
 
             if (newCards.length > 0) {
-                flashcards = [...flashcards, ...newCards];
+                // دمج الكلمات المرفوعة مع الكلمات الحالية
+                const mergedWords = mergeWordsWithDefaults([...flashcards, ...newCards]);
+                flashcards = mergedWords;
                 filteredCards = [...flashcards];
+
+                // تحديث تاريخ آخر تحديث
+                localStorage.setItem('lastUpdate', new Date().toISOString());
+
                 saveData();
                 displayFlashcards();
                 displayWordList();
@@ -2603,13 +2661,13 @@
                 
                 <!-- أزرار تغيير مستوى الحفظ -->
                 <div class="storage-controls">
-                    <button class="storage-btn weak" onclick="changeStorageLevel(${card.id}, 'weak')" title="مبتدئ">
+                    <button class="storage-btn weak" onclick="changeStorageLevel(${card.id}, 'weak')" title="مستوى 1">
                         <i class="fas fa-seedling"></i>
                     </button>
-                    <button class="storage-btn medium" onclick="changeStorageLevel(${card.id}, 'medium')" title="متوسط">
+                    <button class="storage-btn medium" onclick="changeStorageLevel(${card.id}, 'medium')" title="مستوى 2">
                         <i class="fas fa-medal"></i>
                     </button>
-                    <button class="storage-btn strong" onclick="changeStorageLevel(${card.id}, 'strong')" title="متقدم">
+                    <button class="storage-btn strong" onclick="changeStorageLevel(${card.id}, 'strong')" title="مستوى 3">
                         <i class="fas fa-trophy"></i>
                     </button>
                 </div>
@@ -2714,7 +2772,7 @@
             document.getElementById('storageLevelFilter').value = 'all';
             displayFlashcards();
             updateWordsCounter();
-            showNotification('تم إعادة تعيين العرض');
+            showNotification('تم تحديث العرض');
         }
 
         // ===== وظائف الاختبار =====
@@ -2917,11 +2975,11 @@
                     // ترقية مستوى الحفظ إذا كانت الإجابة صحيحة
                     if (card.correctAnswers >= 3 && card.storageLevel === 'weak') {
                         card.storageLevel = 'medium';
-                        showNotification(`تم ترقية "${card.word}" إلى مستوى متوسط`, 'success');
+                        showNotification(`تم ترقية "${card.word}" إلى مستوى 2`, 'success');
                     } else if (card.correctAnswers >= 5 && card.storageLevel === 'medium') {
                         card.storageLevel = 'strong';
                         card.mastered = true;
-                        showNotification(`تم ترقية "${card.word}" إلى مستوى متقدم`, 'success');
+                        showNotification(`تم ترقية "${card.word}" إلى مستوى 3`, 'success');
                     }
                 }
 
@@ -3090,7 +3148,7 @@
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['متقدم', 'متوسط', 'مبتدئ'],
+                    labels: ['مستوى 3', 'مستوى 2', 'مستوى 1'],
                     datasets: [{
                         label: 'عدد التعبيرات',
                         data: [strongWords, mediumWords, weakWords],
